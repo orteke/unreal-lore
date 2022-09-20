@@ -4,59 +4,70 @@ import ReactDOM from 'react-dom/client';
 import { Grid, Image, Card, Label, Input, Popup, Button, Icon } from 'semantic-ui-react'
 import Draggable from 'react-draggable'; // The default
 import DrawLeaderLine from "../components/leaderline";
+import DialogCard from '../components/dialogCard';
 
 export default class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lines: []
+            lines: [], cards: [],
+            updateLinePositions: () => {
+                for (var i = 0; i < this.state.lines.length; i++) {
+                    this.state.lines[i].position()
+                }
+            },
+            removeLines: () => {
+                for (var i = 0; i < this.state.lines.length; i++) {
+                    this.state.lines[i].remove()
+                }
+            }
         };
-        this.updateLinePositions = this.updateLinePositions.bind(this);
-        this.removeLines = this.removeLines.bind(this);
-        this.toggleInput = this.toggleInput.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
         console.log('componentDidMount() lifecycle', this.state);
-        document.addEventListener('click', this.handleClickOutside, true);
-        this.removeLines()
+        this.state.removeLines()
         this.setState({
-            disableDraggable: false,
-            toggle: true,
-            text: "deneme",
+            cards: [
+                {
+                    id: "c1",
+                    text: "deneme",
+                    options: [
+                        {
+                            id: "c1o1",
+                            text: "op"
+
+                        },
+                        {
+                            id: "c1o2",
+                            text: "op2"
+                        },
+                    ]
+                },
+                {
+                    id: "c2",
+                    text: "deneme2",
+                    options: [{
+                        id: "c2o1",
+                        text: "op2"
+                    }]
+                }
+            ],
             lines: [
-                DrawLeaderLine({ startId: "c1o1", endId: "c2" })
+                // DrawLeaderLine({ startId: "c1o1", endId: "c2" })
             ]
         });
     }
 
-    handleClickOutside = event => {
-        if (!String(event.target).includes("Input")) {
-            this.setState({ ...this.state, toggle: true, disableDraggable: false });
-        }
+
+    onChange() {
+        console.log("asdasdasd");
     }
 
-    updateLinePositions() {
-        console.log("asdasd", this.state);
-        for (var i = 0; i < this.state.lines.length; i++) {
-            this.state.lines[i].position()
-        }
-    }
-
-    removeLines() {
-        console.log("asdasd", this.state);
-        for (var i = 0; i < this.state.lines.length; i++) {
-            this.state.lines[i].remove()
-        }
-    }
-
-    toggleInput() {
-        this.setState({ ...this.state, toggle: false, disableDraggable: true });
-    }
-
-    handleChange(event) {
-        this.setState({ ...this.state, text: event.target.value });
+    addLine(line) {
+        let lines = this.state.lines;
+        lines.push(line);
+        this.setState({ ...this.state, lines: lines });
     }
 
     render() {
@@ -87,62 +98,10 @@ export default class Board extends React.Component {
                 </Card>
             </Grid.Column>
             <Grid.Column width={14}>
-                <Draggable
-                    disabled={this.state.disableDraggable}
-                    onStart={this.updateLinePositions}
-                    onDrag={this.updateLinePositions}
-                    onStop={this.updateLinePositions}>
-                    <Card id='c1'>
-                        <Card.Content>
-                            <Card.Description>
-                                Lorem ipsum doler.
-                            </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra id='c1o1'>
-                            Opt 1
-                        </Card.Content>
-                        <Card.Content extra id='c1o2'>
-                            Opt 2
-                        </Card.Content>
-                    </Card>
-                </Draggable>
-                <Draggable
-                    disabled={this.state.disableDraggable}
-                    onStart={this.updateLinePositions}
-                    onDrag={this.updateLinePositions}
-                    onStop={this.updateLinePositions}>
-                    <Card id='c2'>
-                        <Card.Content>
-                            <Card.Description>
-                                {this.state.toggle ? (
-                                    <Popup content='Double click for edit' trigger={<p onDoubleClick={this.toggleInput}>{this.state.text}</p>} />
-                                ) : (
-                                    <Input focus value={this.state.text} onChange={this.handleChange} />
-                                )}
-                            </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra id='c2o1'>
-                            Opt 1
-                        </Card.Content>
-                        <Card.Content extra id='c2o2'>
-                            Opt 2
-                        </Card.Content>
-                        <Card.Content extra>
-                            <div className='ui two buttons'>
-                                <Button icon labelPosition='left'>
-                                    <Icon name='plus' />
-                                    Answer
-                                </Button>
-                                <Button icon labelPosition='right'>
-                                    Remove
-                                    <Icon name='trash' />
-                                </Button>
-                            </div>
-                        </Card.Content>
-                    </Card>
-                </Draggable>
-
+                {this.state.cards.map((card, i) =>
+                    <DialogCard key={i} id={card.id} card={card} onChange={this.onChange.bind(this)} addLine={this.addLine.bind(this)} />
+                )}
             </Grid.Column>
-        </Grid>
+        </Grid >
     }
 }
