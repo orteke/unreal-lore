@@ -1,11 +1,12 @@
 import domuz from '../images/domuz.jpg';
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Grid, Image, Card, Label, Input, Popup, Button, Icon } from 'semantic-ui-react'
+import { Grid, Image, Card, Label, Input, Popup, Button, Icon, Menu } from 'semantic-ui-react'
 import Draggable from 'react-draggable'; // The default
 import DrawLeaderLine from "../components/leaderline";
 import Option from './option';
 import { useState } from "react";
+import '../index.css';
 
 
 export default class DialogCard extends React.Component {
@@ -74,6 +75,19 @@ export default class DialogCard extends React.Component {
         >
             <Card id={this.props.id}>
                 <Card.Content>
+                    <br></br>
+                    <div className='ui two buttons'>
+                        <Button icon labelPosition='left'>
+                            <Icon name='plus' />
+                            Option
+                        </Button>
+                        <Button icon labelPosition='right'>
+                            Remove
+                            <Icon name='trash' />
+                        </Button>
+                    </div>
+                </Card.Content>
+                <Card.Content>
                     {this.state.isEditable ? (
                         <Input focus value={this.state.text} onChange={this.handleChange} />
                     ) : (
@@ -92,19 +106,7 @@ export default class DialogCard extends React.Component {
                         removeLine={this.props.removeLine.bind(this)}
                     >
                     </Option>)}
-                <Card.Content extra>
-                    <div className='ui two buttons'>
-                        <Button icon labelPosition='left'>
-                            <Icon name='plus' />
-                            Option
-                        </Button>
-                        <Button icon labelPosition='right'>
-                            Remove
-                            <Icon name='trash' />
-                        </Button>
-                    </div>
-                </Card.Content>
             </Card>
-        </Draggable>
+        </Draggable >
     }
 }

@@ -1,7 +1,7 @@
 import domuz from '../images/domuz.jpg';
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Grid, Image, Card, Label, Input, Popup, Button, Icon } from 'semantic-ui-react'
+import { Grid, Image, Card, Label, Input, Popup, Button, Icon, Sticky } from 'semantic-ui-react'
 import Draggable from 'react-draggable'; // The default
 import DrawLeaderLine from "../components/leaderline";
 import DialogCard from '../components/dialogCard';
@@ -77,29 +77,37 @@ export default class Board extends React.Component {
     render() {
         return <Grid>
             <Grid.Column width={2}>
-                <Card>
-                    <Image src={domuz} wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header>Domuz Usta</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>Ana karakter</span>
-                        </Card.Meta>
-                        <Card.Description>
-                            Domuz adam sinirli bir ustadır.
-                        </Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                        <Label as='a'>
-                            Action
-                        </Label>
-                        <Label as='a'>
-                            Magic
-                        </Label>
-                        <Label as='a'>
-                            Luck
-                        </Label>
-                    </Card.Content>
-                </Card>
+                <Sticky>
+                    <Card>
+                        <Image src={domuz} wrapped ui={false} />
+                        <Card.Content>
+                            <Card.Header>Domuz Usta</Card.Header>
+                            <Card.Meta>
+                                <span className='date'>Ana karakter</span>
+                            </Card.Meta>
+                            <Card.Description>
+                                Domuz adam sinirli bir ustadır.
+                            </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                            <Label as='a'>
+                                Action
+                            </Label>
+                            <Label as='a'>
+                                Magic
+                            </Label>
+                            <Label as='a'>
+                                Luck
+                            </Label>
+                        </Card.Content>
+                        <Card.Content extra>
+                            <Button icon labelPosition='left'>
+                                <Icon name='plus' />
+                                Card
+                            </Button>
+                        </Card.Content>
+                    </Card>
+                </Sticky>
             </Grid.Column>
             <Grid.Column width={14}>
                 {this.state.cards.map((card, i) =>
