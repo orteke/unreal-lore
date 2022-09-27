@@ -45,21 +45,24 @@ export default class DialogCard extends React.Component {
     startingDrag() {
         console.log("update");
         this.setState({ ...this.state, dragging: true });
+        this.props.onChange("drag")
     }
 
     duringDrag() {
         console.log("update");
         this.setState({ ...this.state, dragging: true });
+        this.props.onChange("drag")
     }
 
     endDrag() {
         console.log("update");
         this.setState({ ...this.state, dragging: false });
+        this.props.onChange("drag")
     }
 
     handleChange(event) {
         this.setState({ ...this.state, text: event.target.value });
-        this.props.onChange()
+        this.props.onChange("input")
     }
 
     render() {
@@ -78,7 +81,16 @@ export default class DialogCard extends React.Component {
                     )}
                 </Card.Content>
                 {this.props.card.options.map((opt, i) =>
-                    <Option key={i} id={opt.id} dialogId={this.props.id} option={opt} dragging={this.state.dragging}>
+                    <Option
+                        key={i}
+                        id={opt.id}
+                        dialogId={this.props.id}
+                        option={opt}
+                        dragging={this.state.dragging}
+                        onChange={this.props.onChange.bind(this)}
+                        addLine={this.props.addLine.bind(this)}
+                        removeLine={this.props.removeLine.bind(this)}
+                    >
                     </Option>)}
                 <Card.Content extra>
                     <div className='ui two buttons'>

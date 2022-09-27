@@ -10,23 +10,12 @@ export default class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lines: [], cards: [],
-            updateLinePositions: () => {
-                for (var i = 0; i < this.state.lines.length; i++) {
-                    this.state.lines[i].position()
-                }
-            },
-            removeLines: () => {
-                for (var i = 0; i < this.state.lines.length; i++) {
-                    this.state.lines[i].remove()
-                }
-            }
+            lines: [], cards: []
         };
     }
 
     componentDidMount() {
         console.log('componentDidMount() lifecycle', this.state);
-        this.state.removeLines()
         this.setState({
             cards: [
                 {
@@ -53,20 +42,35 @@ export default class Board extends React.Component {
                     }]
                 }
             ],
-            lines: [
-                // DrawLeaderLine({ startId: "c1o1", endId: "c2" })
-            ]
+            lines: []
         });
     }
 
 
-    onChange() {
-        console.log("asdasdasd");
+    onChange(action) {
+        console.log("action", action);
+        switch (action) {
+            case "input":
+                // code block
+                break;
+            case "drag":
+                let lines = this.state.lines;
+                for (let i = 0; i < lines.length; i++) {
+                    lines[i].position();
+                }
+                this.setState({ ...this.state, lines: lines });
+        }
     }
 
     addLine(line) {
         let lines = this.state.lines;
         lines.push(line);
+        this.setState({ ...this.state, lines: lines });
+    }
+
+    removeLine(i) {
+        let lines = this.state.lines;
+        lines.splice(i, 1);
         this.setState({ ...this.state, lines: lines });
     }
 
@@ -99,7 +103,14 @@ export default class Board extends React.Component {
             </Grid.Column>
             <Grid.Column width={14}>
                 {this.state.cards.map((card, i) =>
-                    <DialogCard key={i} id={card.id} card={card} onChange={this.onChange.bind(this)} addLine={this.addLine.bind(this)} />
+                    <DialogCard
+                        key={i}
+                        id={card.id}
+                        card={card}
+                        onChange={this.onChange.bind(this)}
+                        addLine={this.addLine.bind(this)}
+                        removeLine={this.removeLine.bind(this)}
+                    />
                 )}
             </Grid.Column>
         </Grid >

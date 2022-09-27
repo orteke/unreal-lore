@@ -25,6 +25,7 @@ export default class Option extends React.Component {
 
     componentDidMount() {
         document.addEventListener('click', this.handleClickOutside, true);
+        this.props.addLine(DrawLeaderLine({ startId: this.props.id, endId: "c2" }))
     }
 
     componentDidUpdate(prevProps, prevState) {
