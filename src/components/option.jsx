@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { Grid, Image, Card, Label, Input, Popup, Button, Icon } from 'semantic-ui-react'
 import Draggable from 'react-draggable'; // The default
 import DrawLeaderLine from "../components/leaderline";
+import '../index.css';
 
 export default class Option extends React.Component {
     constructor(props) {
@@ -50,7 +51,11 @@ export default class Option extends React.Component {
             {this.state.isEditable ? (
                 <Input focus value={this.state.text} onChange={this.handleChange} />
             ) : (
-                <Popup content='Double click for edit' trigger={<p onDoubleClick={this.toggleInput}>{this.state.text}</p>} />
+                <Popup content='Double click for edit' trigger={
+                    <p onDoubleClick={this.toggleInput}>
+                        {this.state.text}<Icon name='delete' className='remove-icon' />
+                    </p>
+                } />
             )}
         </Card.Content>
     }

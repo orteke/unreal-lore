@@ -5,6 +5,7 @@ import { Grid, Image, Card, Label, Input, Popup, Button, Icon, Sticky } from 'se
 import Draggable from 'react-draggable'; // The default
 import DrawLeaderLine from "../components/leaderline";
 import DialogCard from '../components/dialogCard';
+import '../index.css';
 
 export default class Board extends React.Component {
     constructor(props) {
@@ -101,9 +102,17 @@ export default class Board extends React.Component {
                             </Label>
                         </Card.Content>
                         <Card.Content extra>
-                            <Button icon labelPosition='left'>
+                            <Button icon labelPosition='left' className='feature-button'>
                                 <Icon name='plus' />
                                 Card
+                            </Button>
+                            <Button icon labelPosition='left' className='feature-button'>
+                                <Icon name='download' />
+                                JSON
+                            </Button>
+                            <Button icon labelPosition='left' className='feature-button'>
+                                <Icon name='table' />
+                                UE-DataTable
                             </Button>
                         </Card.Content>
                     </Card>

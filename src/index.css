@@ -16,3 +16,11 @@ code {
 .baloon {
   margin: 5px!important;
 }
+
+.remove-icon{
+  float: right;
+}
+
+.feature-button{
+  margin-top: 5px!important;
+}
