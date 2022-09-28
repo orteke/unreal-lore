@@ -1,0 +1,206 @@
+﻿[
+	{
+		"Name": "0",
+		"hint": "Mr. Hamilton sonunda geldiniz. Mektubu gönderdiğimden beri gözüm yollardaydı.",
+		"ops": [
+			{
+				"text": "Sağolun.",
+				"next": 5
+			},
+			{
+				"text": "Elimden geldiğince hızlı geldim.",
+				"next": 5
+			},
+			{
+				"text": "Lütfen beni Doctor Hamilton olarak çağırın.",
+				"next": 1
+			}
+		]
+	},
+	{
+		"Name": "1",
+		"hint": "ahm... Özür dilerim, Dr. Hamilton",
+		"ops": [
+			{
+				"text": "Lüfen, ünvanlar benim için önemlidir",
+				"next": 2
+			},
+			{
+				"text": "Ben sizi Peder yerine Mr. Marcus olarak çağırsaydım eminim hoşunuza gitmezdi",
+				"next": 2
+			}
+		]
+	},
+	{
+		"Name": "2",
+		"hint": "Haklısınız, Peder ünvanı için kadınlara tövbe ettim.",
+		"ops": [
+			{
+				"text": "Peki erkeklere? yada nasıl söylenir? küçük erkeklere?",
+				"next": 3
+			},
+			{
+				"text": "Birbirimize nasıl hitap edeceğimizi çözdüysek artık başlayabiliriz.",
+				"next": 5
+			}
+		]
+	},
+	{
+		"Name": "3",
+		"hint": "Kendim hariç herkese tövbeliyim.",
+		"ops": [
+			{
+				"text": "Bu durum çok zor olsa gerek Peder. Size saygım arttı. Buraya neden çağrıldım?",
+				"next": 5
+			},
+			{
+				"text": "Tanrı size bu tarz şeylerin hayalini kurmayı da yasakladı mı?",
+				"next": 4
+			},
+			{
+				"text": "Tanrı yardımcınız olsun konumuza dönelim.",
+				"next": 5
+			}
+		]
+	},
+	{
+		"Name": "4",
+		"hint": "Tanrı insanın sadece fiziksel olarak eyleme geçtiği durumlarda yargılar. O tarz düşünceler şeytanın insanın kulağına fısıldadığı fenalıklardır. İnsanları düşüncelerinden dolayı suçlayamayız.",
+		"ops": [
+			{
+				"text": "Haklısınız. Peki bu kasabada nelerden suçluyorsunuz insanları?",
+				"next": 5
+			},
+			{
+				"text": "Bazı düşüncüler vardır ki fiziksel eylemlerden fenadır. Kulaktan kulağa yayılır ve yaşanacak büyük eylemlere sebeb olurlar. Doktorlara göre de kötü düşünce suç değildir. Sesli söylenmediği sürece...",
+				"next": 5
+			},
+			{
+				"text": "Üstünüzdeki bu kıyafet olmasa bu sözlerin bir pedere ait olduğuna inanmazdım. Neyse konumuza dönelim.",
+				"next": 5
+			}
+		]
+	},
+	{
+		"Name": "5",
+		"hint": "Kasabada yaşanan kötülüklerin sonu gelmiyor. Çeteler, kavga, fuhuş ve son olarak kiliseden çalınan bağış paraları...",
+		"ops": [
+			{
+				"text": "Suçluları tespit edip tedavi edeceğim.",
+				"next": 6
+			},
+			{
+				"text": "Şüphelendiğiniz biri var mı?",
+				"next": 6
+			}
+		]
+	},
+	{
+		"Name": "6",
+		"hint": "Anlamıyorsunuz doktor. Herkes yoldan çıkmış durumda. Artık bir şüpheli yok. Herkes suç işliyor.",
+		"ops": [
+			{
+				"text": "Bu nasıl mümkün olabilir? Bütün bir toplum yozlaşmış olamaz. Yinede gidip herkesle konuşacağım.",
+				"next": 7
+			},
+			{
+				"text": "O zaman herkes cezasını çeker. Bu ülke kaostan çok çekti. Bu hastaları tedavi edeceğim. Gidip hastaları tespit etsem iyi olacak.",
+				"next": 7
+			}
+		]
+	},
+	{
+		"Name": "7",
+		"hint": "Sözlerle duurmu anlatmak mümkün değil Dr.Hamilton. Gidiniz ve kendiniz görünüz.",
+		"ops": [
+			{
+				"text": "Göreceğim.",
+				"next": 0
+			}
+		]
+	},
+	{
+		"Name": "8",
+		"hint": "Evet Dr. Ne düşünüyorsunuz?",
+		"ops": [
+			{
+				"text": "Durum tahmin ettiğimden daha kötü. Nasıl oldu böyle?",
+				"next": 0
+			},
+			{
+				"text": "Hastalık bu kasabada herkese bulaşmış. Herkesi tedavi etmeliyiz",
+				"next": 0
+			},
+			{
+				"text": "Bu durum ne kadardır böyle?",
+				"next": 8
+			},
+		]
+	},
+	{
+		"Name": "9",
+		"hint": "Bu kasabaya pek iyi insanlar gelmiyor. Şartlar ağır olunca...",
+		"ops": [
+			{
+				"text": "İyi insanlar sert koşullara dayanamaz mı?",
+				"next": 10
+			},
+			{
+				"text": "Kötü insanlar ağır şartları mı tercih eder?",
+				"next": 13
+			}
+		]
+	},
+	{
+		"Name": "10",
+		"hint": "İnsanları kötülük yapmaya iten şeylerden belkide en önemlisi ağır şartlardır. Aç insan çalar, sevgi görmeyen şiddet gösterir, eşit davranılmayan kıskanır.",
+		"ops": [
+			{
+				"text": "Siz din adamlarına bundan dolayı ihtiyaç yok mu? Ahlaki yönden kusurlu yetiştirilmiş bireyleri kötülük yolundan saptırmanız gerekmez mi?",
+				"next": 11
+			},
+			{
+				"text": "İnsan özünde kusurludur. Kötülük yapmak isterse kendine bir bahane bulur ve kendini davranışını mazur görür. Tanrı çoktan işlevini yitirmiştir.",
+				"next": 12
+			}
+		]
+	},
+	{
+		"Name": "11",
+		"hint": "Evet din bunun için var. Ancak kulaklarını kapatanlar için Tanrı'nın peygamberler aracılığıyla söylediği şarkıları duyamazlar.",
+		"ops": [
+			{
+				"text": "Din sadece dine inanan insanlarda işe yarıyor. Bu kasabada Tanrı işlevini yitirmiş.",
+				"next": 12
+			},
+			{
+				"text": "İnsanları din ile korkutarak yada manipüle ederek suçtan uzak tutmaya devam edeceğim. Din benim en güçlü silahım.",
+				"next": 0
+			}
+		]
+	},
+	{
+		"Name": "12",
+		"hint": "Neler söylüyorsun? Tanrı nasıl işlevini yitirir?",
+		"ops": [
+			{
+				"text": "Herkesin iyi olduğu bir yerde Tanrı'ya ihtiyaç kalkar. Çünkü kötülük olmaz ve kötülüklerden korunmaya gerek de olmaz. Herkesin kötü olduğu yerde Tanrı işlevini yitirir. Çünkü iyi olan ezilir ve kaybeder.",
+				"next": 0
+			}
+		]
+	},
+	{
+		"Name": "13",
+		"hint": "Kurbağalar bataklıkta, güzel ötüşlü kuşlar ağaçlarda yuvalarında yaşar. Canlı tabiatına uygun olan yeri seçer.",
+		"ops": [
+			{
+				"text": "Belkide suçla savaşmak yerine dikkatimizi ağır şartları ortadan kaldrımaya verseydik daha kolay olurdu.",
+				"next": 0
+			},
+			{
+				"text": "Kötülüğe hiçbir yerde geçit yok. Hem dininiz bunu emretmiyor mu?",
+				"next": 11
+			}
+		]
+	}
+]

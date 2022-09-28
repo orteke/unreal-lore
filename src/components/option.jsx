@@ -1,10 +1,7 @@
-import domuz from '../images/domuz.jpg';
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
-import { Grid, Image, Card, Label, Input, Popup, Button, Icon } from 'semantic-ui-react'
-import Draggable from 'react-draggable'; // The default
-import DrawLeaderLine from "../components/leaderline";
 import '../index.css';
+import React, { useEffect } from 'react';
+import { Card, Label, Input, Popup, Icon } from 'semantic-ui-react'
+import DrawLeaderLine from "../components/leaderline";
 
 export default class Option extends React.Component {
     constructor(props) {

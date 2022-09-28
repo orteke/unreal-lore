@@ -1,12 +1,8 @@
-import domuz from '../images/domuz.jpg';
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
-import { Grid, Image, Card, Label, Input, Popup, Button, Icon, Menu } from 'semantic-ui-react'
-import Draggable from 'react-draggable'; // The default
-import DrawLeaderLine from "../components/leaderline";
-import Option from './option';
-import { useState } from "react";
 import '../index.css';
+import React from 'react';
+import { Card, Input, Popup, Button, Icon } from 'semantic-ui-react'
+import Draggable from 'react-draggable'; // The default
+import Option from './option';
 
 
 export default class DialogCard extends React.Component {

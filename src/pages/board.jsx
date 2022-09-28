@@ -1,23 +1,30 @@
-import domuz from '../images/domuz.jpg';
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
-import { Grid, Image, Card, Label, Input, Popup, Button, Icon, Sticky } from 'semantic-ui-react'
-import Draggable from 'react-draggable'; // The default
-import DrawLeaderLine from "../components/leaderline";
-import DialogCard from '../components/dialogCard';
 import '../index.css';
+import React from 'react';
+import { Grid } from 'semantic-ui-react'
+import DialogCard from '../components/dialogCard';
+import Char from '../components/char';
+
 
 export default class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lines: [], cards: []
+            lines: [], cards: [], char: {
+                name: "Domuz Usta",
+                role: "Ana karakter",
+                description: "çok sinirilidir"
+            },
         };
     }
 
     componentDidMount() {
         console.log('componentDidMount() lifecycle', this.state);
         this.setState({
+            char: {
+                name: "Domuz Usta",
+                role: "Ana karakter",
+                description: "çok sinirilidir"
+            },
             cards: [
                 {
                     id: "c1",
@@ -78,45 +85,9 @@ export default class Board extends React.Component {
     render() {
         return <Grid>
             <Grid.Column width={2}>
-                <Sticky>
-                    <Card>
-                        <Image src={domuz} wrapped ui={false} />
-                        <Card.Content>
-                            <Card.Header>Domuz Usta</Card.Header>
-                            <Card.Meta>
-                                <span className='date'>Ana karakter</span>
-                            </Card.Meta>
-                            <Card.Description>
-                                Domuz adam sinirli bir ustadır.
-                            </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra>
-                            <Label as='a'>
-                                Action
-                            </Label>
-                            <Label as='a'>
-                                Magic
-                            </Label>
-                            <Label as='a'>
-                                Luck
-                            </Label>
-                        </Card.Content>
-                        <Card.Content extra>
-                            <Button icon labelPosition='left' className='feature-button'>
-                                <Icon name='plus' />
-                                Card
-                            </Button>
-                            <Button icon labelPosition='left' className='feature-button'>
-                                <Icon name='download' />
-                                JSON
-                            </Button>
-                            <Button icon labelPosition='left' className='feature-button'>
-                                <Icon name='table' />
-                                UE-DataTable
-                            </Button>
-                        </Card.Content>
-                    </Card>
-                </Sticky>
+                <Char
+                    char={this.state.char}
+                />
             </Grid.Column>
             <Grid.Column width={14}>
                 {this.state.cards.map((card, i) =>
