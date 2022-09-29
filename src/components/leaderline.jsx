@@ -7,7 +7,7 @@ const DrawLeaderLine = ({ startId, endId }) => {
     document.getElementById(startId),
     document.getElementById(endId),
     {
-      startSocket: "right",
+      startSocket: "auto",
       endSocket: "top",
       color: "teal"
     }
@@ -19,7 +19,7 @@ const DrawLeaderLine = ({ startId, endId }) => {
 
 DrawLeaderLine.defaultProps = {
   options: {
-    startSocket: "right",
+    startSocket: "auto",
     endSocket: "top",
     startSocketGravity: 450,
     endSocketGravity: 450

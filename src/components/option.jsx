@@ -9,6 +9,7 @@ export default class Option extends React.Component {
 
         this.state = {
             text: props.option.text,
+            next: props.option.next,
             isEditable: false,
             lines: []
         }
@@ -23,7 +24,9 @@ export default class Option extends React.Component {
 
     componentDidMount() {
         document.addEventListener('click', this.handleClickOutside, true);
-        this.props.addLine(DrawLeaderLine({ startId: this.props.id, endId: "c2" }))
+        if (this.state.next != "0") {
+            this.props.addLine(DrawLeaderLine({ startId: this.props.id, endId: this.state.next }));
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {

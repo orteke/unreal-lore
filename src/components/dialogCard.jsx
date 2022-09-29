@@ -10,10 +10,10 @@ export default class DialogCard extends React.Component {
         super(props);
 
         this.state = {
-            text: props.card.text,
+            hint: props.card.hint,
             isEditable: false,
             isDisabledDraggable: false,
-            dragging: false
+            dragging: false,
         }
 
         this.id = props.id;
@@ -51,14 +51,14 @@ export default class DialogCard extends React.Component {
         this.props.onChange("drag")
     }
 
-    endDrag() {
+    endDrag(e, data) {
         console.log("update");
         this.setState({ ...this.state, dragging: false });
         this.props.onChange("drag")
     }
 
     handleChange(event) {
-        this.setState({ ...this.state, text: event.target.value });
+        this.setState({ ...this.state, hint: event.target.value });
         this.props.onChange("input")
     }
 
@@ -85,17 +85,17 @@ export default class DialogCard extends React.Component {
                 </Card.Content>
                 <Card.Content>
                     {this.state.isEditable ? (
-                        <Input focus value={this.state.text} onChange={this.handleChange} />
+                        <Input focus value={this.state.hint} onChange={this.handleChange} />
                     ) : (
-                        <Popup content={'Double click for edit'} trigger={<p onDoubleClick={this.toggleInput}>{this.state.text}</p>} />
+                        <Popup content={'Double click for edit'} trigger={<p onDoubleClick={this.toggleInput}>{this.state.hint}</p>} />
                     )}
                 </Card.Content>
-                {this.props.card.options.map((opt, i) =>
+                {this.props.card.ops.map((op, i) =>
                     <Option
                         key={i}
-                        id={opt.id}
+                        id={op.id}
                         dialogId={this.props.id}
-                        option={opt}
+                        option={op}
                         dragging={this.state.dragging}
                         onChange={this.props.onChange.bind(this)}
                         addLine={this.props.addLine.bind(this)}
