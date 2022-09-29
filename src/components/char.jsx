@@ -96,7 +96,7 @@ export default class Char extends React.Component {
                         <Icon name='plus' />
                         Card
                     </Button>
-                    <Button icon labelPosition='left' className='feature-button'>
+                    <Button icon labelPosition='left' className='feature-button' onClick={this.props.exportJSON}>
                         <Icon name='download' />
                         JSON
                     </Button>

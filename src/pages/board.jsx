@@ -16,7 +16,6 @@ export default class Board extends React.Component {
         console.log('componentDidMount() lifecycle', this.state);
     }
 
-
     onChange(action) {
         console.log("action", action);
         switch (action) {
@@ -30,6 +29,23 @@ export default class Board extends React.Component {
                 }
                 this.setState({ ...this.state, lines: lines });
         }
+    }
+
+    exportJSON() {
+        const json = JSON.stringify(this.state, null, 2);
+        const blob = new Blob([json], { type: "application/json" });
+        const href = URL.createObjectURL(blob);
+
+        // create "a" HTLM element with href to file
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = this.state.character.name + ".json";
+        document.body.appendChild(link);
+        link.click();
+
+        // clean up "a" element & remove ObjectURL
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
     }
 
     addLine(line) {
@@ -50,6 +66,7 @@ export default class Board extends React.Component {
                 <Grid.Column width={2}>
                     <Char
                         char={this.state.character}
+                        exportJSON={this.exportJSON.bind(this)}
                     />
                 </Grid.Column>
                 <Grid.Column width={14}>
