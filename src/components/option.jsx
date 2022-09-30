@@ -44,6 +44,9 @@ export default class Option extends React.Component {
 
     handleChange(event) {
         this.setState({ ...this.state, text: event.target.value });
+        this.props.onChange("input", {
+            "type": "option", "id": this.props.id, "text": event.target.value,
+        })
     }
 
     render() {

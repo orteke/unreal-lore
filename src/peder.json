@@ -23,7 +23,8 @@
 					"text": "Lütfen beni Doctor Hamilton olarak çağırın.",
 					"next": "c2"
 				}
-			]
+			],
+			"position": {}
 		},
 		{
 			"id": "c2",
@@ -38,7 +39,8 @@
 					"text": "Ben sizi Peder yerine Mr. Marcus olarak çağırsaydım eminim hoşunuza gitmezdi",
 					"next": "c3"
 				}
-			]
+			],
+			"position": {}
 		},
 		{
 			"id": "c3",
@@ -53,7 +55,8 @@
 					"text": "Birbirimize nasıl hitap edeceğimizi çözdüysek artık başlayabiliriz.",
 					"next": "c6"
 				}
-			]
+			],
+			"position": {}
 		},
 		{
 			"id": "c4",
@@ -73,7 +76,11 @@
 					"text": "Tanrı yardımcınız olsun konumuza dönelim.",
 					"next": "c6"
 				}
-			]
+			],
+			"position": {
+				"x": 411,
+				"y": -264
+			}
 		},
 		{
 			"id": "c5",
@@ -93,7 +100,8 @@
 					"text": "Üstünüzdeki bu kıyafet olmasa bu sözlerin bir pedere ait olduğuna inanmazdım. Neyse konumuza dönelim.",
 					"next": "c6"
 				}
-			]
+			],
+			"position": {}
 		},
 		{
 			"id": "c6",
@@ -108,7 +116,8 @@
 					"text": "Şüphelendiğiniz biri var mı?",
 					"next": "c7"
 				}
-			]
+			],
+			"position": {}
 		},
 		{
 			"id": "c7",
@@ -123,7 +132,8 @@
 					"text": "O zaman herkes cezasını çeker. Bu ülke kaostan çok çekti. Bu hastaları tedavi edeceğim. Gidip hastaları tespit etsem iyi olacak.",
 					"next": "c8"
 				}
-			]
+			],
+			"position": {}
 		},
 		{
 			"id": "c8",
@@ -132,7 +142,8 @@
 				"id": "c8o1",
 				"text": "Göreceğim.",
 				"next": "0"
-			}]
+			}],
+			"position": {}
 		},
 		{
 			"id": "c9",
@@ -152,7 +163,8 @@
 					"text": "Bu durum ne kadardır böyle?",
 					"next": "c10"
 				}
-			]
+			],
+			"position": {}
 		},
 		{
 			"id": "c10",
@@ -167,7 +179,8 @@
 					"text": "Kötü insanlar ağır şartları mı tercih eder?",
 					"next": "c14"
 				}
-			]
+			],
+			"position": {}
 		},
 		{
 			"id": "c11",
@@ -182,7 +195,8 @@
 					"text": "İnsan özünde kusurludur. Kötülük yapmak isterse kendine bir bahane bulur ve kendini davranışını mazur görür. Tanrı çoktan işlevini yitirmiştir.",
 					"next": "c13"
 				}
-			]
+			],
+			"position": {}
 		},
 		{
 			"id": "c12",
@@ -197,7 +211,8 @@
 					"text": "İnsanları din ile korkutarak yada manipüle ederek suçtan uzak tutmaya devam edeceğim. Din benim en güçlü silahım.",
 					"next": "0"
 				}
-			]
+			],
+			"position": {}
 		},
 		{
 			"id": "c13",
@@ -206,7 +221,8 @@
 				"id": "c13o1",
 				"text": "Herkesin iyi olduğu bir yerde Tanrı'ya ihtiyaç kalkar. Çünkü kötülük olmaz ve kötülüklerden korunmaya gerek de olmaz. Herkesin kötü olduğu yerde Tanrı işlevini yitirir. Çünkü iyi olan ezilir ve kaybeder.",
 				"next": "0"
-			}]
+			}],
+			"position": {}
 		},
 		{
 			"id": "c14",
@@ -221,7 +237,8 @@
 					"text": "Kötülüğe hiçbir yerde geçit yok. Hem dininiz bunu emretmiyor mu?",
 					"next": "c12"
 				}
-			]
+			],
+			"position": {}
 		}
 	]
 }

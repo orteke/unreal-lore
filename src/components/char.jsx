@@ -40,14 +40,35 @@ export default class Char extends React.Component {
 
     handleNameChange(event) {
         this.setState({ ...this.state, name: event.target.value });
+        this.props.onChange("input", {
+            "type": "character", "character": {
+                name: event.target.value,
+                role: this.state.role,
+                description: this.state.description,
+            }
+        })
     }
 
     handleRoleChange(event) {
         this.setState({ ...this.state, role: event.target.value });
+        this.props.onChange("input", {
+            "type": "character", "character": {
+                name: this.state.name,
+                role: event.target.value,
+                description: this.state.description,
+            }
+        })
     }
 
     handleDescriptionChange(event) {
         this.setState({ ...this.state, description: event.target.value });
+        this.props.onChange("input", {
+            "type": "character", "character": {
+                name: this.state.name,
+                role: this.state.role,
+                description: event.target.value,
+            }
+        })
     }
 
     render() {

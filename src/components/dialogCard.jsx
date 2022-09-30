@@ -14,6 +14,8 @@ export default class DialogCard extends React.Component {
             isEditable: false,
             isDisabledDraggable: false,
             dragging: false,
+            x: props.card.position.x,
+            y: props.card.position.y,
         }
 
         this.id = props.id;
@@ -42,24 +44,29 @@ export default class DialogCard extends React.Component {
     startingDrag() {
         console.log("update");
         this.setState({ ...this.state, dragging: true });
-        this.props.onChange("drag")
     }
 
-    duringDrag() {
+    duringDrag(e, data) {
         console.log("update");
         this.setState({ ...this.state, dragging: true });
-        this.props.onChange("drag")
+        this.props.onChange("drag", {
+            "id": this.props.id, "position": { x: data.lastX, y: data.lastY },
+        })
     }
 
     endDrag(e, data) {
-        console.log("update");
+        console.log("update", data);
         this.setState({ ...this.state, dragging: false });
-        this.props.onChange("drag")
+        this.props.onChange("drag", {
+            "id": this.props.id, "position": { x: data.lastX, y: data.lastY },
+        })
     }
 
     handleChange(event) {
         this.setState({ ...this.state, hint: event.target.value });
-        this.props.onChange("input")
+        this.props.onChange("input", {
+            "type": "card", "id": this.props.id, "hint": event.target.value,
+        })
     }
 
     render() {
@@ -68,6 +75,7 @@ export default class DialogCard extends React.Component {
             onStart={this.startingDrag}
             onDrag={this.duringDrag}
             onStop={this.endDrag}
+            positionOffset={{ x: this.props.position.x, y: this.props.position.y }}
         >
             <Card id={this.props.id}>
                 <Card.Content>
