@@ -1,6 +1,6 @@
 {
     // Prevents VS Code from formatting JavaScript with the default linter
-    "javascript.format.enable": false,
+    "javascript.format.enable": true,
     // Prevents VS Code linting JavaScript with the default linter
     "javascript.validate.enable": false,
     // Lints with Standard JS

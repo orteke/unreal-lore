@@ -6,21 +6,21 @@ import Char from '../components/char'
 import lore from '../peder.json'
 
 export default class Board extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = { ...lore, lines: [] }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     console.log('componentDidMount() lifecycle', this.state)
   }
 
-  onChange (action, data) {
+  onChange(action, data) {
     console.log('action', action)
 
-    let cards = []
-    let lines = []
-    let isDone
+    let cards = this.state.cards;
+    let lines = this.state.lines;
+    let isDone;
 
     switch (action) {
       case 'input':
@@ -28,12 +28,32 @@ export default class Board extends React.Component {
           case 'character':
             this.setState({ ...this.state, character: data.character })
 
-            break
+            return
           case 'card':
-            cards = this.state.cards
             for (let i = 0; i < cards.length; i++) {
-              if (cards[i].id === data.id) {
-                cards[i].hint = data.hint
+              if (cards[i].id != data.id) {
+                continue
+              }
+
+              cards[i].hint = data.hint
+
+              break
+            }
+
+            break
+          case 'option':
+            let cardId = data.id.split("o")[0]
+            for (let i = 0; i < cards.length; i++) {
+              if (cards[i].id != cardId) {
+                continue
+              }
+
+              for (let j = 0; j < cards[i].ops.length; j++) {
+                if (cards[i].ops[j].id != data.id) {
+                  continue
+                }
+
+                cards[i].ops[j].text = data.text
                 isDone = true
 
                 break
@@ -44,50 +64,27 @@ export default class Board extends React.Component {
               }
             }
 
-            this.setState({ ...this.state, cards })
-
             break
-          case 'option':
-            cards = this.state.cards
-            for (let i = 0; i < cards.length; i++) {
-              for (let i = 0; i < cards[i].ops.length; i++) {
-                if (cards[i].ops[i].id === data.id) {
-                  cards[i].ops[i].text = data.text
-                  isDone = true
-
-                  break
-                }
-              }
-
-              if (isDone) {
-                break
-              }
-            }
-
-            this.setState({ ...this.state, cards })
         }
 
         break
       case 'drag':
-        lines = this.state.lines
         for (let i = 0; i < lines.length; i++) {
           lines[i].position()
         }
 
-        cards = this.state.cards
         for (let i = 0; i < cards.length; i++) {
-          if (cards[i].id === data.id) {
-            cards[i].position = data.position
-
-            break
+          if (cards[i].id != data.id) {
+            continue
           }
+
+          cards[i].position = data.position
+
+          break
         }
 
-        this.setState({ ...this.state, lines, cards })
-
         break
-      case 'add': {
-        cards = this.state.cards
+      case 'add':
         switch (data.type) {
           case 'card':
             cards.push({
@@ -100,24 +97,65 @@ export default class Board extends React.Component {
             break
           case 'option':
             for (let i = 0; i < cards.length; i++) {
-              if (cards[i].id === data.id) {
-                cards[i].ops.push({
-                  id: data.id + 'o' + cards[i].ops.length.toString(),
-                  text: 'text',
-                  next: 0
-                })
-
-                break
+              if (cards[i].id != data.id) {
+                continue
               }
+
+              cards[i].ops.push({
+                id: data.id + 'o' + cards[i].ops.length.toString(),
+                text: 'text',
+                next: 0
+              })
+
+              break
             }
         }
 
-        this.setState({ ...this.state, lines, cards })
-      }
+        break
+      case 'remove':
+        switch (data.type) {
+          case 'card':
+            for (let i = 0; i < cards.length; i++) {
+              if (cards[i].id == data.id) {
+                continue
+              }
+
+              cards[i].id = 'c' + (i + 1).toString();
+              for (let j = 0; j < cards[i].ops.length; j++) {
+                cards[i].ops[j].id = cards[i].id + 'o' + (j + 1).toString();
+                if (cards[i].ops[j].next == data.id) {
+                  cards[i].ops[j].next = '0'
+                }
+              }
+            }
+
+            break
+          case 'option':
+            let cardId = data.id.split("o")[0]
+            for (let i = 0; i < cards.length; i++) {
+              if (cards[i].id != cardId) {
+                continue
+              }
+
+              for (let j = 0; j < cards[i].ops.length; j++) {
+                if (cards[i].ops[j].id === data.id) {
+                  continue
+                }
+
+                cards[i].ops[j].id = cardId + 'o' + (j + 1).toString();
+              }
+            }
+
+            break
+        }
+
+        break
     }
+
+    this.setState({ ...this.state, lines, cards })
   }
 
-  handleExportJSON () {
+  handleExportJSON() {
     const json = JSON.stringify(this.state, null, 2)
     const blob = new Blob([json], { type: 'application/json' })
     const href = URL.createObjectURL(blob)
@@ -134,19 +172,19 @@ export default class Board extends React.Component {
     URL.revokeObjectURL(href)
   }
 
-  addLine (line) {
+  addLine(line) {
     const lines = this.state.lines
     lines.push(line)
     this.setState({ ...this.state, lines })
   }
 
-  removeLine (i) {
+  removeLine(i) {
     const lines = this.state.lines
     lines.splice(i, 1)
     this.setState({ ...this.state, lines })
   }
 
-  render () {
+  render() {
     return (
       <div>
         <Grid>

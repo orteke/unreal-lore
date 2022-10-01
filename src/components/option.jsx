@@ -4,7 +4,7 @@ import { Card, Input, Popup, Icon } from 'semantic-ui-react'
 import DrawLeaderLine from '../components/leaderline'
 
 export default class Option extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -18,11 +18,12 @@ export default class Option extends React.Component {
 
     this.handleToggleInput = this.toggleInput.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
 
     console.log(props.dragging)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     document.addEventListener('click', this.handleClickOutside, true)
     console.log(this.props.id, this.state.next)
     if (this.state.next != '0') {
@@ -30,7 +31,7 @@ export default class Option extends React.Component {
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
   }
 
   handleClickOutside = event => {
@@ -39,35 +40,41 @@ export default class Option extends React.Component {
     }
   }
 
-  toggleInput () {
+  toggleInput() {
     this.setState({ ...this.state, isEditable: true })
   }
 
-  handleChange (event) {
+  handleChange(event) {
     this.setState({ ...this.state, text: event.target.value })
     this.props.onChange('input', {
       type: 'option', id: this.props.id, text: event.target.value
     })
   }
 
-  render () {
+  handleRemove() {
+    this.props.onChange('remove', {
+      type: 'option', id: this.props.id
+    })
+  }
+
+  render() {
     return (
       <Card.Content extra id={this.props.id}>
         {this.state.isEditable
           ? (
             <Input focus value={this.state.text} onChange={this.handleChange} />
-            )
+          )
           : (
             <Popup
               content='Double click for edit' trigger={
                 <p onDoubleClick={this.handleToggleInput}>
                   {this.state.text}
                   <Icon link name='cut' color='black' className='op-icon' />
-                  <Icon link name='delete' color='red' className='op-icon' />
+                  <Icon link name='delete' color='red' className='op-icon' onClick={this.handleRemove} />
                 </p>
-                }
+              }
             />
-            )}
+          )}
       </Card.Content>
     )
   }

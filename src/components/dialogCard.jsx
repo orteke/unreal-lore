@@ -5,7 +5,7 @@ import Draggable from 'react-draggable' // The default
 import Option from './option'
 
 export default class DialogCard extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -25,10 +25,10 @@ export default class DialogCard extends React.Component {
     this.handleDuringDrag = this.duringDrag.bind(this)
     this.handleEndDrag = this.endDrag.bind(this)
     this.handleAddOption = this.addOption.bind(this)
-    this.handleRemoveOption = this.removeOption.bind(this)
+    this.handleRemove = this.remove.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     document.addEventListener('click', this.handleClickOutside, true)
   }
 
@@ -38,16 +38,16 @@ export default class DialogCard extends React.Component {
     }
   }
 
-  toggleInput () {
+  toggleInput() {
     this.setState({ ...this.state, isEditable: true, isDisabledDraggable: true })
   }
 
-  startingDrag () {
+  startingDrag() {
     console.log('update')
     this.setState({ ...this.state, dragging: true })
   }
 
-  duringDrag (e, data) {
+  duringDrag(e, data) {
     console.log('update')
     this.setState({ ...this.state, dragging: true })
     this.props.onChange('drag', {
@@ -55,7 +55,7 @@ export default class DialogCard extends React.Component {
     })
   }
 
-  endDrag (e, data) {
+  endDrag(e, data) {
     console.log('update', data)
     this.setState({ ...this.state, dragging: false })
     this.props.onChange('drag', {
@@ -63,24 +63,27 @@ export default class DialogCard extends React.Component {
     })
   }
 
-  handleChange (event) {
+  handleChange(event) {
     this.setState({ ...this.state, hint: event.target.value })
     this.props.onChange('input', {
       type: 'card', id: this.props.id, hint: event.target.value
     })
   }
 
-  addOption () {
+  addOption() {
     this.props.onChange('add', {
       type: 'option', id: this.props.id
     })
   }
 
-  removeOption () {
+  remove() {
     console.log('update')
+    this.props.onChange('remove', {
+      type: 'card', id: this.props.id
+    })
   }
 
-  render () {
+  render() {
     return (
       <Draggable
         disabled={this.state.isDisabledDraggable}
@@ -100,7 +103,7 @@ export default class DialogCard extends React.Component {
                 <Icon name='plus' />
                 Option
               </Button>
-              <Button icon labelPosition='right' onClick={this.handleRemoveOption}>
+              <Button icon labelPosition='right' onClick={this.handleRemove}>
                 Remove
                 <Icon name='trash' />
               </Button>
@@ -110,10 +113,10 @@ export default class DialogCard extends React.Component {
             {this.state.isEditable
               ? (
                 <Input focus value={this.state.hint} onChange={this.handleChange} />
-                )
+              )
               : (
                 <Popup content='Double click for edit' trigger={<p onDoubleClick={this.handleToggleInput}>{this.state.hint}</p>} />
-                )}
+              )}
           </Card.Content>
           {this.props.card.ops.map((op, i) =>
             <Option
