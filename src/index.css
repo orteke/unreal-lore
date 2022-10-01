@@ -17,10 +17,23 @@ code {
   margin: 5px!important;
 }
 
-.remove-icon{
+.op-icon{
   float: right;
 }
 
 .feature-button{
   margin-top: 5px!important;
+}
+
+.card-number{
+  margin-bottom: 5px!important;
+}
+
+.teal{
+  color: #006767;
+}
+
+.teal-bg{
+  background-color: #006767!important;
+  color: white!important;
 }

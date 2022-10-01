@@ -1,65 +1,74 @@
-import '../index.css';
-import React, { useEffect } from 'react';
-import { Card, Label, Input, Popup, Icon } from 'semantic-ui-react'
-import DrawLeaderLine from "../components/leaderline";
+import '../index.css'
+import React from 'react'
+import { Card, Input, Popup, Icon } from 'semantic-ui-react'
+import DrawLeaderLine from '../components/leaderline'
 
 export default class Option extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor (props) {
+    super(props)
 
-        this.state = {
-            text: props.option.text,
-            next: props.option.next,
-            isEditable: false,
-            lines: []
-        }
-
-        this.id = props.id;
-
-        this.toggleInput = this.toggleInput.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-
-        console.log(props.dragging);
+    this.state = {
+      text: props.option.text,
+      next: props.option.next,
+      isEditable: false,
+      lines: []
     }
 
-    componentDidMount() {
-        document.addEventListener('click', this.handleClickOutside, true);
-        if (this.state.next != "0") {
-            this.props.addLine(DrawLeaderLine({ startId: this.props.id, endId: this.state.next }));
-        }
-    }
+    this.id = props.id
 
-    componentDidUpdate(prevProps, prevState) {
-    }
+    this.handleToggleInput = this.toggleInput.bind(this)
+    this.handleChange = this.handleChange.bind(this)
 
-    handleClickOutside = event => {
-        if (!String(event.target).includes("Input")) {
-            this.setState({ ...this.state, isEditable: false });
-        }
-    }
+    console.log(props.dragging)
+  }
 
-    toggleInput() {
-        this.setState({ ...this.state, isEditable: true });
+  componentDidMount () {
+    document.addEventListener('click', this.handleClickOutside, true)
+    console.log(this.props.id, this.state.next)
+    if (this.state.next != '0') {
+      this.props.addLine(DrawLeaderLine({ startId: this.props.id, endId: this.state.next }))
     }
+  }
 
-    handleChange(event) {
-        this.setState({ ...this.state, text: event.target.value });
-        this.props.onChange("input", {
-            "type": "option", "id": this.props.id, "text": event.target.value,
-        })
+  componentDidUpdate (prevProps, prevState) {
+  }
+
+  handleClickOutside = event => {
+    if (!String(event.target).includes('Input')) {
+      this.setState({ ...this.state, isEditable: false })
     }
+  }
 
-    render() {
-        return <Card.Content extra id={this.props.id}>
-            {this.state.isEditable ? (
-                <Input focus value={this.state.text} onChange={this.handleChange} />
-            ) : (
-                <Popup content='Double click for edit' trigger={
-                    <p onDoubleClick={this.toggleInput}>
-                        {this.state.text}<Icon name='delete' className='remove-icon' />
-                    </p>
-                } />
+  toggleInput () {
+    this.setState({ ...this.state, isEditable: true })
+  }
+
+  handleChange (event) {
+    this.setState({ ...this.state, text: event.target.value })
+    this.props.onChange('input', {
+      type: 'option', id: this.props.id, text: event.target.value
+    })
+  }
+
+  render () {
+    return (
+      <Card.Content extra id={this.props.id}>
+        {this.state.isEditable
+          ? (
+            <Input focus value={this.state.text} onChange={this.handleChange} />
+            )
+          : (
+            <Popup
+              content='Double click for edit' trigger={
+                <p onDoubleClick={this.handleToggleInput}>
+                  {this.state.text}
+                  <Icon link name='cut' color='black' className='op-icon' />
+                  <Icon link name='delete' color='red' className='op-icon' />
+                </p>
+                }
+            />
             )}
-        </Card.Content>
-    }
+      </Card.Content>
+    )
+  }
 }

@@ -1,14 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from 'react'
 
-function Mom() {
-    return (
-        <form>
-            <label>Enterr your name:
-                <input type="text" />
-            </label>
-        </form>
-    )
+function Mom () {
+  return (
+    <form>
+      <label>Enterr your name:
+        <input type='text' />
+      </label>
+    </form>
+  )
 }
 
-export default Mom;
+export default Mom
