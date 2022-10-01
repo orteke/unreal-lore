@@ -109,6 +109,29 @@ export default class Board extends React.Component {
 
               break
             }
+          case 'line':
+            let cardId = data.id.split("o")[0]
+            isDone = false
+            for (let i = 0; i < cards.length; i++) {
+              if (cards[i].id != cardId) {
+                continue
+              }
+
+              for (let j = 0; j < cards[i].ops.length; j++) {
+                if (cards[i].ops[j].id != data.id) {
+                  continue
+                }
+
+                cards[i].ops[j].next = data.next;
+                isDone = true;
+
+                break
+              }
+
+              if (isDone) {
+                break
+              }
+            }
         }
 
         break
