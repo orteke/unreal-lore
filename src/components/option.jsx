@@ -19,14 +19,12 @@ export default class Option extends React.Component {
     this.handleToggleInput = this.toggleInput.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
-
-    console.log(props.dragging)
   }
 
   componentDidMount() {
     document.addEventListener('click', this.handleClickOutside, true)
-    console.log(this.props.id, this.state.next)
     if (this.state.next != '0') {
+      console.log('!!!!', this.props.id, this.state.next);
       this.props.addLine(DrawLeaderLine({ startId: this.props.id, endId: this.state.next }))
     }
   }

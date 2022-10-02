@@ -3,11 +3,18 @@ import React from 'react'
 import { Grid } from 'semantic-ui-react'
 import DialogCard from '../components/dialogCard'
 import Char from '../components/char'
-import lore from '../peder.json'
+import loreJSON from '../peder.json'
 
 export default class Board extends React.Component {
   constructor(props) {
     super(props)
+
+    let lore = JSON.parse(localStorage.getItem('lore'));
+    if (lore == null) {
+      lore = loreJSON;
+      localStorage.setItem('lore', JSON.stringify(lore));
+    }
+
     this.state = { ...lore, lines: [] }
   }
 
@@ -18,9 +25,12 @@ export default class Board extends React.Component {
   onChange(action, data) {
     console.log('action', action)
 
-    let cards = this.state.cards;
-    let lines = this.state.lines;
-    let isDone;
+    let cards = this.state.cards
+    let lines = this.state.lines
+    let isDone
+    let needsRefresh
+
+    this.setState({ ...this.state, 'lines': lines, 'cards': [] })
 
     switch (action) {
       case 'input':
@@ -42,7 +52,7 @@ export default class Board extends React.Component {
 
             break
           case 'option':
-            let cardId = data.id.split("o")[0]
+            const cardId = data.id.split('o')[0]
             for (let i = 0; i < cards.length; i++) {
               if (cards[i].id != cardId) {
                 continue
@@ -110,7 +120,7 @@ export default class Board extends React.Component {
               break
             }
           case 'line':
-            let cardId = data.id.split("o")[0]
+            const cardId = data.id.split('o')[0]
             isDone = false
             for (let i = 0; i < cards.length; i++) {
               if (cards[i].id != cardId) {
@@ -122,8 +132,8 @@ export default class Board extends React.Component {
                   continue
                 }
 
-                cards[i].ops[j].next = data.next;
-                isDone = true;
+                cards[i].ops[j].next = data.next
+                isDone = true
 
                 break
               }
@@ -136,46 +146,49 @@ export default class Board extends React.Component {
 
         break
       case 'remove':
+        needsRefresh = true;
         switch (data.type) {
           case 'card':
-            for (let i = 0; i < cards.length; i++) {
-              if (cards[i].id == data.id) {
-                continue
-              }
+            let cardId = parseInt(data.id.substring(1)) - 1;
+            cards.splice(cardId, 1);
 
+            for (let i = 0; i < cards.length; i++) {
               cards[i].id = 'c' + (i + 1).toString();
               for (let j = 0; j < cards[i].ops.length; j++) {
-                cards[i].ops[j].id = cards[i].id + 'o' + (j + 1).toString();
+                cards[i].ops[j].id = cards[i].id + 'o' + (j + 1).toString()
                 if (cards[i].ops[j].next == data.id) {
-                  cards[i].ops[j].next = '0'
+                  cards[i].ops[j].next = '0';
+                } else if (i >= cardId) {
+                  if (cards[i].ops[j].next == '0') {
+                    continue
+                  }
+
+                  let nextCardId = parseInt(cards[i].ops[j].next.substring(1)) - 1;
+                  cards[i].ops[j].next = 'c' + nextCardId.toString();
                 }
               }
             }
 
             break
           case 'option':
-            let cardId = data.id.split("o")[0]
-            for (let i = 0; i < cards.length; i++) {
-              if (cards[i].id != cardId) {
-                continue
-              }
-
-              for (let j = 0; j < cards[i].ops.length; j++) {
-                if (cards[i].ops[j].id === data.id) {
-                  continue
-                }
-
-                cards[i].ops[j].id = cardId + 'o' + (j + 1).toString();
-              }
+            cardId = parseInt(data.id.split('o')[0].substring(1)) - 1;
+            let opId = parseInt(data.id.split('o')[1]) - 1;
+            cards[cardId].ops.splice(opId, 1);
+            for (let i = 0; i < cards[cardId].ops.length; i++) {
+              cards[cardId].ops[i].id = cards[cardId].ops[i].id + 'o' + (i + 1).toString()
             }
-
-            break
         }
-
-        break
     }
 
-    this.setState({ ...this.state, lines, cards })
+    let lore = JSON.parse(localStorage.getItem('lore'));
+    lore.cards = cards;
+    localStorage.setItem('lore', JSON.stringify(lore));
+
+    if (needsRefresh) {
+      window.location.reload(false);
+    } else {
+      this.setState({ ...this.state, lines, cards });
+    }
   }
 
   handleExportJSON() {
@@ -214,7 +227,7 @@ export default class Board extends React.Component {
           <Grid.Column width={2}>
             <Char
               char={this.state.character}
-              exportJSON={this.handleExportJSON.bind(this)}
+              handleExportJSON={this.handleExportJSON.bind(this)}
               onChange={this.onChange.bind(this)}
             />
           </Grid.Column>
