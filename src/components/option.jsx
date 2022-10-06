@@ -11,7 +11,8 @@ export default class Option extends React.Component {
       text: props.option.text,
       next: props.option.next,
       isEditable: false,
-      lines: []
+      lines: [],
+      selected: false
     }
 
     this.id = props.id
@@ -19,12 +20,13 @@ export default class Option extends React.Component {
     this.handleToggleInput = this.toggleInput.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
+    this.handleCut = this.handleCut.bind(this)
   }
 
   componentDidMount() {
     document.addEventListener('click', this.handleClickOutside, true)
     if (this.state.next != '0') {
-      console.log('!!!!', this.props.id, this.state.next);
       this.props.addLine(DrawLeaderLine({ startId: this.props.id, endId: this.state.next }))
     }
   }
@@ -55,9 +57,29 @@ export default class Option extends React.Component {
     })
   }
 
+  handleCut() {
+    this.props.onChange('cut', {
+      type: 'option', id: this.props.id
+    })
+  }
+
+  handleSelect() {
+    let selected = !this.state.selected
+    this.setState({ ...this.state, selected: !this.state.selected })
+    if (selected) {
+      this.props.onChange('select', {
+        type: 'option', id: this.props.id
+      })
+    } else {
+      this.props.onChange('unselect', {
+        type: 'option', id: this.props.id
+      })
+    }
+  }
+
   render() {
     return (
-      <Card.Content extra id={this.props.id}>
+      <Card.Content extra id={this.props.id} onClick={this.handleSelect} className={this.state.selected ? 'teal-bg' : ''}>
         {this.state.isEditable
           ? (
             <Input focus value={this.state.text} onChange={this.handleChange} />
@@ -67,7 +89,7 @@ export default class Option extends React.Component {
               content='Double click for edit' trigger={
                 <p onDoubleClick={this.handleToggleInput}>
                   {this.state.text}
-                  <Icon link name='cut' color='black' className='op-icon' />
+                  {this.state.next != '0' ? <Icon link name='cut' color='black' className='op-icon' onClick={this.handleCut} /> : false}
                   <Icon link name='delete' color='red' className='op-icon' onClick={this.handleRemove} />
                 </p>
               }

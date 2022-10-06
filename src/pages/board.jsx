@@ -15,7 +15,7 @@ export default class Board extends React.Component {
       localStorage.setItem('lore', JSON.stringify(lore));
     }
 
-    this.state = { ...lore, lines: [] }
+    this.state = { ...lore, lines: [], selected: '' }
   }
 
   componentDidMount() {
@@ -28,9 +28,8 @@ export default class Board extends React.Component {
     let cards = this.state.cards
     let lines = this.state.lines
     let isDone
-    let needsRefresh
-
-    this.setState({ ...this.state, 'lines': lines, 'cards': [] })
+    let selected = this.state.selected
+    let needsRefresh = false
 
     switch (action) {
       case 'input':
@@ -175,9 +174,46 @@ export default class Board extends React.Component {
             let opId = parseInt(data.id.split('o')[1]) - 1;
             cards[cardId].ops.splice(opId, 1);
             for (let i = 0; i < cards[cardId].ops.length; i++) {
-              cards[cardId].ops[i].id = cards[cardId].ops[i].id + 'o' + (i + 1).toString()
+              cards[cardId].ops[i].id = cards[cardId].id + 'o' + (i + 1).toString()
             }
+
+            break
         }
+
+        break
+      case 'select':
+        switch (data.type) {
+          case 'card':
+            if (this.state.selected != '') {
+              console.log('!!!!', data.id);
+              let cardId = parseInt(this.state.selected.split('o')[0].substring(1)) - 1;
+              let opId = parseInt(this.state.selected.split('o')[1]) - 1;
+
+              cards[cardId].ops[opId].next = data.id
+              selected = ''
+              needsRefresh = true
+            }
+
+            break
+          case 'option':
+            selected = data.id
+
+            break
+        }
+
+        break
+      case 'unselect':
+        selected = ''
+
+        break
+      case 'cut':
+        let cardId = parseInt(data.id.split('o')[0].substring(1)) - 1;
+        let opId = parseInt(data.id.split('o')[1]) - 1;
+        cards[cardId].ops[opId].next = '0'
+
+        needsRefresh = true
+
+        break
     }
 
     let lore = JSON.parse(localStorage.getItem('lore'));
@@ -185,9 +221,12 @@ export default class Board extends React.Component {
     localStorage.setItem('lore', JSON.stringify(lore));
 
     if (needsRefresh) {
-      window.location.reload(false);
+      console.log('refresh');
+      // window.location.reload(false);
+      // this.setState({ 'cards': cards });
+      // this.forceUpdate()
     } else {
-      this.setState({ ...this.state, lines, cards });
+      this.setState({ ...this.state, lines, cards, selected: selected });
     }
   }
 
@@ -232,9 +271,9 @@ export default class Board extends React.Component {
             />
           </Grid.Column>
           <Grid.Column width={14}>
-            {this.state.cards.map((card, i) =>
+            {this.state.cards.map(card =>
               <DialogCard
-                key={i}
+                key={card.id}
                 id={card.id}
                 card={card}
                 onChange={this.onChange.bind(this)}

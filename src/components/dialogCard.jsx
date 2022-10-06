@@ -26,6 +26,7 @@ export default class DialogCard extends React.Component {
     this.handleEndDrag = this.endDrag.bind(this)
     this.handleAddOption = this.addOption.bind(this)
     this.handleRemove = this.remove.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   componentDidMount() {
@@ -83,6 +84,12 @@ export default class DialogCard extends React.Component {
     })
   }
 
+  handleSelect() {
+    this.props.onChange('select', {
+      type: 'card', id: this.props.id
+    })
+  }
+
   render() {
     return (
       <Draggable
@@ -94,7 +101,7 @@ export default class DialogCard extends React.Component {
       >
         <Card id={this.props.id}>
           <Card.Content>
-            <Label circular className='card-number teal-bg'>
+            <Label circular className='card-number teal-bg' onClick={this.handleSelect}>
               {this.props.id}
             </Label>
 
@@ -120,7 +127,7 @@ export default class DialogCard extends React.Component {
           </Card.Content>
           {this.props.card.ops.map((op, i) =>
             <Option
-              key={i}
+              key={op.id}
               id={op.id}
               dialogId={this.props.id}
               option={op}
