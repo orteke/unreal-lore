@@ -222,7 +222,7 @@ export default class Board extends React.Component {
 
     if (needsRefresh) {
       console.log('refresh');
-      // window.location.reload(false);
+      window.location.reload(false);
       // this.setState({ 'cards': cards });
       // this.forceUpdate()
     } else {
