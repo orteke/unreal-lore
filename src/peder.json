@@ -1,244 +1,305 @@
 ﻿{
-	"character": {
-		"name": "Domuz Usta",
-		"imageUrl": "",
-		"role": "Ana Karakter",
-		"description": "Çok sinirli bir ustadır."
-	},
-	"cards": [{
-			"id": "c1",
-			"hint": "Mr. Hamilton sonunda geldiniz. Mektubu gönderdiğimden beri gözüm yollardaydı.",
-			"ops": [{
-					"id": "c1o1",
-					"text": "Sağolun.",
-					"next": "c6"
-				},
-				{
-					"id": "c1o2",
-					"text": "Elimden geldiğince hızlı geldim.",
-					"next": "c6"
-				},
-				{
-					"id": "c1o3",
-					"text": "Lütfen beni Doctor Hamilton olarak çağırın.",
-					"next": "c2"
-				}
-			],
-			"position": {}
-		},
-		{
-			"id": "c2",
-			"hint": "ahm... Özür dilerim, Dr. Hamilton",
-			"ops": [{
-					"id": "c2o1",
-					"text": "Lüfen, ünvanlar benim için önemlidir",
-					"next": "c3"
-				},
-				{
-					"id": "c2o2",
-					"text": "Ben sizi Peder yerine Mr. Marcus olarak çağırsaydım eminim hoşunuza gitmezdi",
-					"next": "c3"
-				}
-			],
-			"position": {}
-		},
-		{
-			"id": "c3",
-			"hint": "Haklısınız, Peder ünvanı için kadınlara tövbe ettim.",
-			"ops": [{
-					"id": "c3o1",
-					"text": "Peki erkeklere? yada nasıl söylenir? küçük erkeklere?",
-					"next": "c4"
-				},
-				{
-					"id": "c3o2",
-					"text": "Birbirimize nasıl hitap edeceğimizi çözdüysek artık başlayabiliriz.",
-					"next": "c6"
-				}
-			],
-			"position": {}
-		},
-		{
-			"id": "c4",
-			"hint": "Kendim hariç herkese tövbeliyim.",
-			"ops": [{
-					"id": "c4o1",
-					"text": "Bu durum çok zor olsa gerek Peder. Size saygım arttı. Buraya neden çağrıldım?",
-					"next": "c6"
-				},
-				{
-					"id": "c4o2",
-					"text": "Tanrı size bu tarz şeylerin hayalini kurmayı da yasakladı mı?",
-					"next": "c5"
-				},
-				{
-					"id": "c4o3",
-					"text": "Tanrı yardımcınız olsun konumuza dönelim.",
-					"next": "c6"
-				}
-			],
-			"position": {
-				"x": 411,
-				"y": -264
-			}
-		},
-		{
-			"id": "c5",
-			"hint": "Tanrı insanın sadece fiziksel olarak eyleme geçtiği durumlarda yargılar. O tarz düşünceler şeytanın insanın kulağına fısıldadığı fenalıklardır. İnsanları düşüncelerinden dolayı suçlayamayız.",
-			"ops": [{
-					"id": "c5o1",
-					"text": "Haklısınız. Peki bu kasabada nelerden suçluyorsunuz insanları?",
-					"next": "c6"
-				},
-				{
-					"id": "c5o2",
-					"text": "Bazı düşüncüler vardır ki fiziksel eylemlerden fenadır. Kulaktan kulağa yayılır ve yaşanacak büyük eylemlere sebeb olurlar. Doktorlara göre de kötü düşünce suç değildir. Sesli söylenmediği sürece...",
-					"next": "c6"
-				},
-				{
-					"id": "c5o3",
-					"text": "Üstünüzdeki bu kıyafet olmasa bu sözlerin bir pedere ait olduğuna inanmazdım. Neyse konumuza dönelim.",
-					"next": "c6"
-				}
-			],
-			"position": {}
-		},
-		{
-			"id": "c6",
-			"hint": "Kasabada yaşanan kötülüklerin sonu gelmiyor. Çeteler, kavga, fuhuş ve son olarak kiliseden çalınan bağış paraları...",
-			"ops": [{
-					"id": "c6o1",
-					"text": "Suçluları tespit edip tedavi edeceğim.",
-					"next": "c7"
-				},
-				{
-					"id": "c6o2",
-					"text": "Şüphelendiğiniz biri var mı?",
-					"next": "c7"
-				}
-			],
-			"position": {}
-		},
-		{
-			"id": "c7",
-			"hint": "Anlamıyorsunuz doktor. Herkes yoldan çıkmış durumda. Artık bir şüpheli yok. Herkes suç işliyor.",
-			"ops": [{
-					"id": "c7o1",
-					"text": "Bu nasıl mümkün olabilir? Bütün bir toplum yozlaşmış olamaz. Yinede gidip herkesle konuşacağım.",
-					"next": "c8"
-				},
-				{
-					"id": "c7o2",
-					"text": "O zaman herkes cezasını çeker. Bu ülke kaostan çok çekti. Bu hastaları tedavi edeceğim. Gidip hastaları tespit etsem iyi olacak.",
-					"next": "c8"
-				}
-			],
-			"position": {}
-		},
-		{
-			"id": "c8",
-			"hint": "Sözlerle duurmu anlatmak mümkün değil Dr.Hamilton. Gidiniz ve kendiniz görünüz.",
-			"ops": [{
-				"id": "c8o1",
-				"text": "Göreceğim.",
-				"next": "0"
-			}],
-			"position": {}
-		},
-		{
-			"id": "c9",
-			"hint": "Evet Dr. Ne düşünüyorsunuz?",
-			"ops": [{
-					"id": "c9o1",
-					"text": "Durum tahmin ettiğimden daha kötü. Nasıl oldu böyle?",
-					"next": "0"
-				},
-				{
-					"id": "c9o2",
-					"text": "Hastalık bu kasabada herkese bulaşmış. Herkesi tedavi etmeliyiz",
-					"next": "0"
-				},
-				{
-					"id": "c9o3",
-					"text": "Bu durum ne kadardır böyle?",
-					"next": "c10"
-				}
-			],
-			"position": {}
-		},
-		{
-			"id": "c10",
-			"hint": "Bu kasabaya pek iyi insanlar gelmiyor. Şartlar ağır olunca...",
-			"ops": [{
-					"id": "c10o1",
-					"text": "İyi insanlar sert koşullara dayanamaz mı?",
-					"next": "c11"
-				},
-				{
-					"id": "c10o2",
-					"text": "Kötü insanlar ağır şartları mı tercih eder?",
-					"next": "c14"
-				}
-			],
-			"position": {}
-		},
-		{
-			"id": "c11",
-			"hint": "İnsanları kötülük yapmaya iten şeylerden belkide en önemlisi ağır şartlardır. Aç insan çalar, sevgi görmeyen şiddet gösterir, eşit davranılmayan kıskanır.",
-			"ops": [{
-					"id": "c11o1",
-					"text": "Siz din adamlarına bundan dolayı ihtiyaç yok mu? Ahlaki yönden kusurlu yetiştirilmiş bireyleri kötülük yolundan saptırmanız gerekmez mi?",
-					"next": "c12"
-				},
-				{
-					"id": "c11o2",
-					"text": "İnsan özünde kusurludur. Kötülük yapmak isterse kendine bir bahane bulur ve kendini davranışını mazur görür. Tanrı çoktan işlevini yitirmiştir.",
-					"next": "c13"
-				}
-			],
-			"position": {}
-		},
-		{
-			"id": "c12",
-			"hint": "Evet din bunun için var. Ancak kulaklarını kapatanlar için Tanrı'nın peygamberler aracılığıyla söylediği şarkıları duyamazlar.",
-			"ops": [{
-					"id": "c12o1",
-					"text": "Din sadece dine inanan insanlarda işe yarıyor. Bu kasabada Tanrı işlevini yitirmiş.",
-					"next": "c13"
-				},
-				{
-					"id": "c12o2",
-					"text": "İnsanları din ile korkutarak yada manipüle ederek suçtan uzak tutmaya devam edeceğim. Din benim en güçlü silahım.",
-					"next": "0"
-				}
-			],
-			"position": {}
-		},
-		{
-			"id": "c13",
-			"hint": "Neler söylüyorsun? Tanrı nasıl işlevini yitirir?",
-			"ops": [{
-				"id": "c13o1",
-				"text": "Herkesin iyi olduğu bir yerde Tanrı'ya ihtiyaç kalkar. Çünkü kötülük olmaz ve kötülüklerden korunmaya gerek de olmaz. Herkesin kötü olduğu yerde Tanrı işlevini yitirir. Çünkü iyi olan ezilir ve kaybeder.",
-				"next": "0"
-			}],
-			"position": {}
-		},
-		{
-			"id": "c14",
-			"hint": "Kurbağalar bataklıkta, güzel ötüşlü kuşlar ağaçlarda yuvalarında yaşar. Canlı tabiatına uygun olan yeri seçer.",
-			"ops": [{
-					"id": "c14o1",
-					"text": "Belkide suçla savaşmak yerine dikkatimizi ağır şartları ortadan kaldrımaya verseydik daha kolay olurdu.",
-					"next": "0"
-				},
-				{
-					"id": "c14o2",
-					"text": "Kötülüğe hiçbir yerde geçit yok. Hem dininiz bunu emretmiyor mu?",
-					"next": "c12"
-				}
-			],
-			"position": {}
-		}
-	]
+  "character": {
+    "name": "Domuz Usta",
+    "imageUrl": "",
+    "role": "Ana Karakter",
+    "description": "Çok sinirli bir ustadır."
+  },
+  "cards": [
+    {
+      "id": "c1",
+      "hint": "Mr. Hamilton sonunda geldiniz. Mektubu gönderdiğimden beri gözüm yollardaydı.",
+      "ops": [
+        {
+          "id": "c1o1",
+          "text": "Sağolun.",
+          "next": "c6",
+          "token": "Mj3DZWMuZ9EAqAuBIRTxX"
+        },
+        {
+          "id": "c1o2",
+          "text": "Elimden geldiğince hızlı geldim.",
+          "next": "c6",
+          "token": "Bo2B1HWwqElZpfJYarg02"
+        },
+        {
+          "id": "c1o3",
+          "text": "Lütfen beni Doctor Hamilton olarak çağırın.",
+          "next": "c2",
+          "token": "q7kf9vSesNPudnN8_G7he"
+        }
+      ],
+      "position": {},
+      "token": "UA6gWGoLfmrj2PuP1l4Ur"
+    },
+    {
+      "id": "c2",
+      "hint": "ahm... Özür dilerim, Dr. Hamilton",
+      "ops": [
+        {
+          "id": "c2o1",
+          "text": "Lüfen, ünvanlar benim için önemlidir",
+          "next": "c3",
+          "token": "12d7UXUDuSo9_fPX7_h43"
+        },
+        {
+          "id": "c2o2",
+          "text": "Ben sizi Peder yerine Mr. Marcus olarak çağırsaydım eminim hoşunuza gitmezdi",
+          "next": "c3",
+          "token": "LKgardvsoVG47zcQ3xor2"
+        }
+      ],
+      "position": {},
+      "token": "WpSbh37Hmij6RIwh7Oln7"
+    },
+    {
+      "id": "c3",
+      "hint": "Haklısınız, Peder ünvanı için kadınlara tövbe ettim.",
+      "ops": [
+        {
+          "id": "c3o1",
+          "text": "Peki erkeklere? yada nasıl söylenir? küçük erkeklere?",
+          "next": "c4",
+          "token": "kYlwaaxDfT1cdR8aCX0zu"
+        },
+        {
+          "id": "c3o2",
+          "text": "Birbirimize nasıl hitap edeceğimizi çözdüysek artık başlayabiliriz.",
+          "next": "c6",
+          "token": "MFKKqhHFrkHIHV1w_9Ptc"
+        }
+      ],
+      "position": {},
+      "token": "YN3sIp0KUJFSBWMRNDVbZ"
+    },
+    {
+      "id": "c4",
+      "hint": "Kendim hariç herkese tövbeliyim.",
+      "ops": [
+        {
+          "id": "c4o1",
+          "text": "Bu durum çok zor olsa gerek Peder. Size saygım arttı. Buraya neden çağrıldım?",
+          "next": "c6",
+          "token": "5sc7Q_mp_IRHi2Vk-wE5U"
+        },
+        {
+          "id": "c4o2",
+          "text": "Tanrı size bu tarz şeylerin hayalini kurmayı da yasakladı mı?",
+          "next": "c5",
+          "token": "HDcXE8PAHlEvJsUutdNag"
+        },
+        {
+          "id": "c4o3",
+          "text": "Tanrı yardımcınız olsun konumuza dönelim.",
+          "next": "c6",
+          "token": "zWPGJqdF27kZ2al7FxO7w"
+        }
+      ],
+      "position": {
+        "x": 411,
+        "y": -264
+      },
+      "token": "Y9_UVKvkc8LjHRINPVO6_"
+    },
+    {
+      "id": "c5",
+      "hint": "Tanrı insanın sadece fiziksel olarak eyleme geçtiği durumlarda yargılar. O tarz düşünceler şeytanın insanın kulağına fısıldadığı fenalıklardır. İnsanları düşüncelerinden dolayı suçlayamayız.",
+      "ops": [
+        {
+          "id": "c5o1",
+          "text": "Haklısınız. Peki bu kasabada nelerden suçluyorsunuz insanları?",
+          "next": "c6",
+          "token": "aU0Cbhhj7Oo7hsT1H8AWY"
+        },
+        {
+          "id": "c5o2",
+          "text": "Bazı düşüncüler vardır ki fiziksel eylemlerden fenadır. Kulaktan kulağa yayılır ve yaşanacak büyük eylemlere sebeb olurlar. Doktorlara göre de kötü düşünce suç değildir. Sesli söylenmediği sürece...",
+          "next": "c6",
+          "token": "AEw8Qgog6CGfrL0qEo-c4"
+        },
+        {
+          "id": "c5o3",
+          "text": "Üstünüzdeki bu kıyafet olmasa bu sözlerin bir pedere ait olduğuna inanmazdım. Neyse konumuza dönelim.",
+          "next": "c6",
+          "token": "lmr37OqvvXES6FWxzEHqX"
+        }
+      ],
+      "position": {},
+      "token": "sh-eqjj4nMBBgBArV-OpX"
+    },
+    {
+      "id": "c6",
+      "hint": "Kasabada yaşanan kötülüklerin sonu gelmiyor. Çeteler, kavga, fuhuş ve son olarak kiliseden çalınan bağış paraları...",
+      "ops": [
+        {
+          "id": "c6o1",
+          "text": "Suçluları tespit edip tedavi edeceğim.",
+          "next": "c7",
+          "token": "ma-ODyD4Oc64P3SUgtDtm"
+        },
+        {
+          "id": "c6o2",
+          "text": "Şüphelendiğiniz biri var mı?",
+          "next": "c7",
+          "token": "BJcgwQlyr5hNPzjo5e_KT"
+        }
+      ],
+      "position": {},
+      "token": "9geQ_D4FCSaPR39GfBjwY"
+    },
+    {
+      "id": "c7",
+      "hint": "Anlamıyorsunuz doktor. Herkes yoldan çıkmış durumda. Artık bir şüpheli yok. Herkes suç işliyor.",
+      "ops": [
+        {
+          "id": "c7o1",
+          "text": "Bu nasıl mümkün olabilir? Bütün bir toplum yozlaşmış olamaz. Yinede gidip herkesle konuşacağım.",
+          "next": "c8",
+          "token": "1-dxR6i48phHhIe8x3EWv"
+        },
+        {
+          "id": "c7o2",
+          "text": "O zaman herkes cezasını çeker. Bu ülke kaostan çok çekti. Bu hastaları tedavi edeceğim. Gidip hastaları tespit etsem iyi olacak.",
+          "next": "c8",
+          "token": "3tUMecbtrD21VphvyF_ID"
+        }
+      ],
+      "position": {},
+      "token": "jligMy1bnqgGpWR2TXQLk"
+    },
+    {
+      "id": "c8",
+      "hint": "Sözlerle duurmu anlatmak mümkün değil Dr.Hamilton. Gidiniz ve kendiniz görünüz.",
+      "ops": [
+        {
+          "id": "c8o1",
+          "text": "Göreceğim.",
+          "next": "0",
+          "token": "ncjvDH8gkLLwXmWr6719n"
+        }
+      ],
+      "position": {},
+      "token": "8T7HEQrtkkMdZvEcZ2gKB"
+    },
+    {
+      "id": "c9",
+      "hint": "Evet Dr. Ne düşünüyorsunuz?",
+      "ops": [
+        {
+          "id": "c9o1",
+          "text": "Durum tahmin ettiğimden daha kötü. Nasıl oldu böyle?",
+          "next": "0",
+          "token": "76hqLDxtXlEMG--bz4LZW"
+        },
+        {
+          "id": "c9o2",
+          "text": "Hastalık bu kasabada herkese bulaşmış. Herkesi tedavi etmeliyiz",
+          "next": "0",
+          "token": "CQJHfinTdzVUrkHN5tnvJ"
+        },
+        {
+          "id": "c9o3",
+          "text": "Bu durum ne kadardır böyle?",
+          "next": "c10",
+          "token": "rp3MueNw2gCrnUi9jIsxk"
+        }
+      ],
+      "position": {},
+      "token": "iWmyBbBx5oVR8SfTKAjf2"
+    },
+    {
+      "id": "c10",
+      "hint": "Bu kasabaya pek iyi insanlar gelmiyor. Şartlar ağır olunca...",
+      "ops": [
+        {
+          "id": "c10o1",
+          "text": "İyi insanlar sert koşullara dayanamaz mı?",
+          "next": "c11",
+          "token": "sOjFCzn3lFvSizZwCauij"
+        },
+        {
+          "id": "c10o2",
+          "text": "Kötü insanlar ağır şartları mı tercih eder?",
+          "next": "c14",
+          "token": "DTctBV8EFHzbg8fqXBZNe"
+        }
+      ],
+      "position": {},
+      "token": "hYMi9Boz8gw9Gn4LEvq7A"
+    },
+    {
+      "id": "c11",
+      "hint": "İnsanları kötülük yapmaya iten şeylerden belkide en önemlisi ağır şartlardır. Aç insan çalar, sevgi görmeyen şiddet gösterir, eşit davranılmayan kıskanır.",
+      "ops": [
+        {
+          "id": "c11o1",
+          "text": "Siz din adamlarına bundan dolayı ihtiyaç yok mu? Ahlaki yönden kusurlu yetiştirilmiş bireyleri kötülük yolundan saptırmanız gerekmez mi?",
+          "next": "c12",
+          "token": "NiSjNsE6LksAHXV3RpFw8"
+        },
+        {
+          "id": "c11o2",
+          "text": "İnsan özünde kusurludur. Kötülük yapmak isterse kendine bir bahane bulur ve kendini davranışını mazur görür. Tanrı çoktan işlevini yitirmiştir.",
+          "next": "c13",
+          "token": "mAsVBpJbNR0y2i1i1Hitt"
+        }
+      ],
+      "position": {},
+      "token": "Z_79JCpEKlliu6LcyUsgp"
+    },
+    {
+      "id": "c12",
+      "hint": "Evet din bunun için var. Ancak kulaklarını kapatanlar için Tanrı'nın peygamberler aracılığıyla söylediği şarkıları duyamazlar.",
+      "ops": [
+        {
+          "id": "c12o1",
+          "text": "Din sadece dine inanan insanlarda işe yarıyor. Bu kasabada Tanrı işlevini yitirmiş.",
+          "next": "c13",
+          "token": "UK4wkywgZYe_CG_P4v5G8"
+        },
+        {
+          "id": "c12o2",
+          "text": "İnsanları din ile korkutarak yada manipüle ederek suçtan uzak tutmaya devam edeceğim. Din benim en güçlü silahım.",
+          "next": "0",
+          "token": "4SN52ETfSV9c0efC9syiV"
+        }
+      ],
+      "position": {},
+      "token": "xIi1PPL36q9F9Svq6uSmX"
+    },
+    {
+      "id": "c13",
+      "hint": "Neler söylüyorsun? Tanrı nasıl işlevini yitirir?",
+      "ops": [
+        {
+          "id": "c13o1",
+          "text": "Herkesin iyi olduğu bir yerde Tanrı'ya ihtiyaç kalkar. Çünkü kötülük olmaz ve kötülüklerden korunmaya gerek de olmaz. Herkesin kötü olduğu yerde Tanrı işlevini yitirir. Çünkü iyi olan ezilir ve kaybeder.",
+          "next": "0",
+          "token": "pB95x1JvAoXqOaZ-jF6Gk"
+        }
+      ],
+      "position": {},
+      "token": "WgThpKI9-vBnVcEsSgAJP"
+    },
+    {
+      "id": "c14",
+      "hint": "Kurbağalar bataklıkta, güzel ötüşlü kuşlar ağaçlarda yuvalarında yaşar. Canlı tabiatına uygun olan yeri seçer.",
+      "ops": [
+        {
+          "id": "c14o1",
+          "text": "Belkide suçla savaşmak yerine dikkatimizi ağır şartları ortadan kaldrımaya verseydik daha kolay olurdu.",
+          "next": "0",
+          "token": "Gyvca4M3O_WGcYE-01km4"
+        },
+        {
+          "id": "c14o2",
+          "text": "Kötülüğe hiçbir yerde geçit yok. Hem dininiz bunu emretmiyor mu?",
+          "next": "c12",
+          "token": "_urd3ExTqzrktuy41b3la"
+        }
+      ],
+      "position": {},
+      "token": "PDGanEAsIABZYrp87QZWM"
+    }
+  ]
 }

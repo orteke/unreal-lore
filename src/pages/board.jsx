@@ -1,6 +1,7 @@
 import '../index.css'
 import React from 'react'
 import { Grid } from 'semantic-ui-react'
+import { nanoid } from 'nanoid'
 import DialogCard from '../components/dialogCard'
 import Char from '../components/char'
 import loreJSON from '../peder.json'
@@ -14,6 +15,13 @@ export default class Board extends React.Component {
       lore = loreJSON;
       localStorage.setItem('lore', JSON.stringify(lore));
     }
+
+    // for (let i = 0; i < lore.cards.length; i++) {
+    //   lore.cards[i].token = nanoid()
+    //   for (let j = 0; j < lore.cards[i].ops.length; j++) {
+    //     lore.cards[i].ops[j].token = nanoid()
+    //   }
+    // }
 
     this.state = { ...lore, lines: [], selected: '' }
   }
@@ -29,7 +37,6 @@ export default class Board extends React.Component {
     let lines = this.state.lines
     let isDone
     let selected = this.state.selected
-    let needsRefresh = false
 
     switch (action) {
       case 'input':
@@ -79,7 +86,12 @@ export default class Board extends React.Component {
         break
       case 'drag':
         for (let i = 0; i < lines.length; i++) {
-          lines[i].position()
+          try {
+            lines[i].position();
+          }
+          catch (err) {
+            lines.splice(i, 1);
+          }
         }
 
         for (let i = 0; i < cards.length; i++) {
@@ -145,7 +157,6 @@ export default class Board extends React.Component {
 
         break
       case 'remove':
-        needsRefresh = true;
         switch (data.type) {
           case 'card':
             let cardId = parseInt(data.id.substring(1)) - 1;
@@ -191,7 +202,6 @@ export default class Board extends React.Component {
 
               cards[cardId].ops[opId].next = data.id
               selected = ''
-              needsRefresh = true
             }
 
             break
@@ -211,8 +221,6 @@ export default class Board extends React.Component {
         let opId = parseInt(data.id.split('o')[1]) - 1;
         cards[cardId].ops[opId].next = '0'
 
-        needsRefresh = true
-
         break
     }
 
@@ -220,14 +228,7 @@ export default class Board extends React.Component {
     lore.cards = cards;
     localStorage.setItem('lore', JSON.stringify(lore));
 
-    if (needsRefresh) {
-      console.log('refresh');
-      window.location.reload(false);
-      // this.setState({ 'cards': cards });
-      // this.forceUpdate()
-    } else {
-      this.setState({ ...this.state, lines, cards, selected: selected });
-    }
+    this.setState({ ...this.state, lines: lines, cards: cards, selected: selected });
   }
 
   handleExportJSON() {
@@ -273,7 +274,7 @@ export default class Board extends React.Component {
           <Grid.Column width={14}>
             {this.state.cards.map(card =>
               <DialogCard
-                key={card.id}
+                key={card.token}
                 id={card.id}
                 card={card}
                 onChange={this.onChange.bind(this)}

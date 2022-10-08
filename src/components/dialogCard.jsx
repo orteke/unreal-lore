@@ -127,7 +127,7 @@ export default class DialogCard extends React.Component {
           </Card.Content>
           {this.props.card.ops.map((op, i) =>
             <Option
-              key={op.id}
+              key={op.token}
               id={op.id}
               dialogId={this.props.id}
               option={op}
