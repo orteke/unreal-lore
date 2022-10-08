@@ -8,14 +8,13 @@ export default class Option extends React.Component {
     super(props)
 
     this.state = {
+      id: props.id,
       text: props.option.text,
       next: props.option.next,
       isEditable: false,
       line: null,
       selected: false
     }
-
-    this.id = props.id
 
     this.handleToggleInput = this.toggleInput.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -28,20 +27,18 @@ export default class Option extends React.Component {
     document.addEventListener('click', this.handleClickOutside, true);
     if (this.state.next != '0') {
       let line = DrawLeaderLine({ startId: this.props.id, endId: this.state.next })
-      this.props.addLine(line);
+      this.props.addLine(this.state.id, line);
       this.setState({ ...this.state, line: line });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // if (prevProps.next != this.state.next && this.state.line != null) {
+    // console.log("asdasd", prevProps.option.next, this.state.next);
+    // if (prevProps.option.next == '0' && this.state.next != '0') {
     //   console.log("asdasd", this.state.line);
-    //   this.state.line.remove()
-    //   if (this.state.next != '0') {
-    //     let line = DrawLeaderLine({ startId: this.props.id, endId: this.state.next })
-    //     this.props.addLine(line);
-    //     this.setState({ ...this.state, line: line });
-    //   }
+    //   let line = DrawLeaderLine({ startId: this.props.id, endId: this.state.next })
+    //   this.props.addLine(line);
+    //   this.setState({ ...this.state, line: line });
     // }
   }
 
@@ -63,14 +60,12 @@ export default class Option extends React.Component {
   }
 
   handleRemove() {
-    this.state.line.remove();
     this.props.onChange('remove', {
       type: 'option', id: this.props.id
     })
   }
 
   handleCut() {
-    this.state.line.remove();
     this.props.onChange('cut', {
       type: 'option', id: this.props.id
     })

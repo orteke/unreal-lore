@@ -23,7 +23,7 @@ export default class Board extends React.Component {
     //   }
     // }
 
-    this.state = { ...lore, lines: [], selected: '' }
+    this.state = { ...lore, lines: {}, selected: '' }
   }
 
   componentDidMount() {
@@ -85,14 +85,14 @@ export default class Board extends React.Component {
 
         break
       case 'drag':
-        for (let i = 0; i < lines.length; i++) {
+        Object.keys(lines).forEach(function (key, index) {
           try {
-            lines[i].position();
+            lines[key].position();
           }
           catch (err) {
-            lines.splice(i, 1);
+            delete lines[key];
           }
-        }
+        });
 
         for (let i = 0; i < cards.length; i++) {
           if (cards[i].id != data.id) {
@@ -168,6 +168,8 @@ export default class Board extends React.Component {
                 cards[i].ops[j].id = cards[i].id + 'o' + (j + 1).toString()
                 if (cards[i].ops[j].next == data.id) {
                   cards[i].ops[j].next = '0';
+                  lines[cards[i].ops[j].id].remove();
+                  delete lines[cards[i].ops[j].id];
                 } else if (i >= cardId) {
                   if (cards[i].ops[j].next == '0') {
                     continue
@@ -183,6 +185,10 @@ export default class Board extends React.Component {
           case 'option':
             cardId = parseInt(data.id.split('o')[0].substring(1)) - 1;
             let opId = parseInt(data.id.split('o')[1]) - 1;
+
+            lines[cards[cardId].ops[opId].id].remove();
+            delete lines[cards[cardId].ops[opId].id];
+
             cards[cardId].ops.splice(opId, 1);
             for (let i = 0; i < cards[cardId].ops.length; i++) {
               cards[cardId].ops[i].id = cards[cardId].id + 'o' + (i + 1).toString()
@@ -196,11 +202,11 @@ export default class Board extends React.Component {
         switch (data.type) {
           case 'card':
             if (this.state.selected != '') {
-              console.log('!!!!', data.id);
               let cardId = parseInt(this.state.selected.split('o')[0].substring(1)) - 1;
               let opId = parseInt(this.state.selected.split('o')[1]) - 1;
 
               cards[cardId].ops[opId].next = data.id
+              cards[cardId].ops[opId].token = nanoid();
               selected = ''
             }
 
@@ -219,7 +225,9 @@ export default class Board extends React.Component {
       case 'cut':
         let cardId = parseInt(data.id.split('o')[0].substring(1)) - 1;
         let opId = parseInt(data.id.split('o')[1]) - 1;
-        cards[cardId].ops[opId].next = '0'
+        cards[cardId].ops[opId].next = '0';
+        lines[data.id].remove();
+        delete lines[data.id];
 
         break
     }
@@ -248,15 +256,15 @@ export default class Board extends React.Component {
     URL.revokeObjectURL(href)
   }
 
-  addLine(line) {
-    const lines = this.state.lines
-    lines.push(line)
+  addLine(opId, line) {
+    let lines = this.state.lines
+    lines[opId] = line
     this.setState({ ...this.state, lines })
   }
 
-  removeLine(i) {
-    const lines = this.state.lines
-    lines.splice(i, 1)
+  removeLine(opId) {
+    let lines = this.state.lines
+    delete lines[opId]
     this.setState({ ...this.state, lines })
   }
 
