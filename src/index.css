@@ -60,3 +60,11 @@ code {
   background-color: #2a2a2a !important;
   color: white !important;
 }
+
+.description {
+  font-size: 18px;
+}
+
+.howto {
+  padding-top: 100px;
+}

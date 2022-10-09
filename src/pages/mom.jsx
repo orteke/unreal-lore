@@ -12,14 +12,37 @@ export default class Board extends React.Component {
   constructor(props) {
     super(props)
 
-    this.handleToBoard = this.handleToBoard.bind(this)
+    let lores = JSON.parse(localStorage.getItem('lores'));
+    if (lores == null) {
+      lores = [];
+    }
+
+    this.state = {
+      lores: lores,
+    }
+
+    this.handleAddDocument = this.handleAddDocument.bind(this)
+    this.handleCreateEmptyBoard = this.handleCreateEmptyBoard.bind(this)
   }
 
   componentDidMount() {
     console.log('componentDidMount() lifecycle', this.state)
   }
 
-  handleToBoard() {
+  handleAddDocument() {
+    window.location.href = 'board'
+  }
+
+  handleCreateEmptyBoard() {
+    localStorage.setItem('lore', JSON.stringify({
+      "character": {
+        "name": 'new char_' + this.state.lores.length.toString(),
+        "imageUrl": "",
+        "role": "define a role",
+        "description": "input a description"
+      },
+      "cards": []
+    }));
     window.location.href = 'board'
   }
 
@@ -33,40 +56,18 @@ export default class Board extends React.Component {
             </div>
           </Grid.Column>
           <Grid.Column width={10}>
-            <Container textAlign='center'>
+            <Container textAlign='left' className='howto'>
               <Header as='h1' icon textAlign='center'>
                 <Image src={logo} size='massive' circular />
                 <Header.Content className='white-text'>Unreal Lore</Header.Content>
               </Header>
               <div>
-                <Header as='h2' className='white-text'>Header</Header>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                  ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et
-                  magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                  ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-                  quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-                  arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-                  Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras
-                  dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
-                  Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-                  Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
-                  viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
-                  Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                  ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et
-                  magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                  ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-                  quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-                  arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-                  Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras
-                  dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
-                  Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-                  Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
-                  viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
-                  Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
+                <p className='description'>
+                  UL özellikle rpg oyunları gibi karmaşık ve alternatif seçenekli diyalogları yazmak için geliştirilmiştir.
+                  Oyun senaryosunu yazarken diyalogların nasıl ilerleyeceğini görsel olarak görebilirsiniz.
+                  Aşırı kısa veya aşırı uzun diyalog akışlarını tespit edebilirsiniz.
+                  Her bir karakter için ayrı bir diyalog boardu oluşturursunuz ve kolayca aklınızda olan
+                  hikayeyi yazmaya başlarsınız.
                 </p>
               </div>
 
@@ -77,52 +78,36 @@ export default class Board extends React.Component {
                   <Grid.Row verticalAlign='middle'>
                     <Grid.Column>
                       <Header icon>
-                        <Icon name='pdf file outline' />
-                        No documents are listed for this customer.
+                        <Icon name='upload' />
+                        Upload a lore file
                       </Header>
-                      <Button className='teal-bg'>Add Document</Button>
+                      <Button className='teal-bg' onClick={this.handleAddDocument}>Add Document</Button>
                     </Grid.Column>
 
                     <Grid.Column>
                       <Header icon>
-                        <Icon name='world' />
+                        <Icon name='pin' />
                         Let's start a new lore
                       </Header>
-                      <Button className='teal-bg' onClick={this.handleToBoard}>Create</Button>
+                      <Button className='teal-bg' onClick={this.handleCreateEmptyBoard}>Create Empty Board</Button>
                     </Grid.Column>
                   </Grid.Row>
                 </Grid>
               </Segment>
 
               <div>
-                <Header as='h2' className='white-text'>Header</Header>
+                <Header as='h2' className='white-text'>Unreal Engine Entegrasyonu</Header>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                  ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et
-                  magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                  ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-                  quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-                  arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-                  Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras
-                  dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
-                  Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-                  Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
-                  viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
-                  Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
+                  Dialog boardunda bulunan UE export seçeneği ile dialog'u export edebilirsiniz.
+                  Ardından aşağıda linkleri bulunan unreal engine ile uyumlu data table dosyalarını kullanarak
+                  oyun projenize ekleyebilirsiniz. Oyun içinde nasıl kullanacağınıza kendiniz karar vermelisiniz.
                 </p>
+                <Header as='h2' className='white-text'>Dialog Kartları</Header>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                  ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et
-                  magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-                  ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-                  quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-                  arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-                  Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras
-                  dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
-                  Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-                  Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
-                  viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
-                  Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
+                  Oyuncunun konuşabilieceği her karak ter için bir karakter boardu oluşturulur.
+                  Dialog boardlarında kartlar bulunur. Kartların hint bölümü oyuncunun konuşacağı karakterin söyleyeceği sözü içerir.
+                  Her kartta istediğiniz kadar seçenek ekleyebilirsiniz. Bu seçenekleri diğer kartlara bağlayarak akışı oluşturursunuz.
+                  Json formatında yada diğer export seçenekleri ile istediğiniz gibi kullanabilirsiniz.
                 </p>
               </div>
               <Segment className='orteke'>

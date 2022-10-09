@@ -109,8 +109,9 @@ export default class Board extends React.Component {
         switch (data.type) {
           case 'card':
             cards.push({
-              id: 'c' + cards.length.toString(),
-              hint: 'text',
+              id: 'c' + (cards.length + 1).toString(),
+              token: nanoid(),
+              hint: 'input text',
               position: { x: 0, y: 0 },
               ops: []
             })
@@ -123,8 +124,9 @@ export default class Board extends React.Component {
               }
 
               cards[i].ops.push({
-                id: data.id + 'o' + cards[i].ops.length.toString(),
-                text: 'text',
+                id: data.id + 'o' + (cards[i].ops.length + 1).toString(),
+                token: nanoid(),
+                text: 'input text',
                 next: 0
               })
 
@@ -203,6 +205,7 @@ export default class Board extends React.Component {
           case 'card':
             if (this.state.selected != '') {
               let cardId = parseInt(this.state.selected.split('o')[0].substring(1)) - 1;
+              console.log(this.state.selected);
               let opId = parseInt(this.state.selected.split('o')[1]) - 1;
 
               cards[cardId].ops[opId].next = data.id
