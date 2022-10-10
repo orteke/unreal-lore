@@ -43,7 +43,7 @@ export default class DialogCard extends React.Component {
     this.setState({ ...this.state, isEditable: true, isDisabledDraggable: true })
   }
 
-  startingDrag() {
+  startingDrag(e, data) {
     console.log('update')
     this.setState({ ...this.state, dragging: true })
   }
@@ -97,7 +97,8 @@ export default class DialogCard extends React.Component {
         onStart={this.handleStartingDrag}
         onDrag={this.handleDuringDrag}
         onStop={this.handleEndDrag}
-        positionOffset={{ x: this.props.position.x, y: this.props.position.y }}
+        position={{ x: this.props.position.x, y: this.props.position.y }}
+        scale={0.5}
       >
         <Card id={this.props.id}>
           <Card.Content>
