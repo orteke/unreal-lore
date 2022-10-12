@@ -32,16 +32,6 @@ export default class Option extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // console.log("asdasd", prevProps.option.next, this.state.next);
-    // if (prevProps.option.next == '0' && this.state.next != '0') {
-    //   console.log("asdasd", this.state.line);
-    //   let line = DrawLeaderLine({ startId: this.props.id, endId: this.state.next })
-    //   this.props.addLine(line);
-    //   this.setState({ ...this.state, line: line });
-    // }
-  }
-
   handleClickOutside = event => {
     if (!String(event.target).includes('Input')) {
       this.setState({ ...this.state, isEditable: false, selected: false });

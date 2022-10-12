@@ -44,12 +44,10 @@ export default class DialogCard extends React.Component {
   }
 
   startingDrag(e, data) {
-    console.log('update')
     this.setState({ ...this.state, dragging: true })
   }
 
   duringDrag(e, data) {
-    console.log('update')
     this.setState({ ...this.state, dragging: true })
     this.props.onChange('drag', {
       id: this.props.id, position: { x: data.lastX, y: data.lastY }
@@ -57,7 +55,6 @@ export default class DialogCard extends React.Component {
   }
 
   endDrag(e, data) {
-    console.log('update', data)
     this.setState({ ...this.state, dragging: false })
     this.props.onChange('drag', {
       id: this.props.id, position: { x: data.lastX, y: data.lastY }
@@ -78,7 +75,6 @@ export default class DialogCard extends React.Component {
   }
 
   remove() {
-    console.log('update')
     this.props.onChange('remove', {
       type: 'card', id: this.props.id
     })
