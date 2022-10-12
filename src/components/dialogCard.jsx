@@ -81,6 +81,7 @@ export default class DialogCard extends React.Component {
   }
 
   handleSelect() {
+    console.log('sadsad');
     this.props.onChange('select', {
       type: 'card', id: this.props.id
     })
@@ -98,9 +99,15 @@ export default class DialogCard extends React.Component {
       >
         <Card id={this.props.id}>
           <Card.Content>
-            <Label circular className='card-number teal-bg' onClick={this.handleSelect}>
+            <Label circular className='card-number-left teal-bg'>
               {this.props.id}
             </Label>
+
+
+            {this.props.isConnectable ?
+              <a onClick={this.handleSelect} className='chain'><Label circular className='card-number-right teal' >
+                <Icon name='chain' />
+              </Label></a> : false}
 
             <div className='ui two buttons'>
               <Button icon labelPosition='left' onClick={this.handleAddOption}>
@@ -134,7 +141,7 @@ export default class DialogCard extends React.Component {
               removeLine={this.props.removeLine.bind(this)}
             />)}
         </Card>
-      </Draggable>
+      </Draggable >
     )
   }
 }

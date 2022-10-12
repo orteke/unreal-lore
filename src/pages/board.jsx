@@ -14,7 +14,7 @@ export default class Board extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { ...loreUtils.getLore(), lines: {}, selected: '' }
+    this.state = { ...loreUtils.getLore(), lines: {}, selected: '', isConnectable: false }
   }
 
   componentDidMount() {
@@ -158,6 +158,7 @@ export default class Board extends React.Component {
                 addLine={this.addLine.bind(this)}
                 removeLine={this.removeLine.bind(this)}
                 position={card.position}
+                isConnectable={this.state.selected != ''}
               />
             )}
           </Grid.Column>

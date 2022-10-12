@@ -33,6 +33,12 @@ export default class Option extends React.Component {
   }
 
   handleClickOutside = event => {
+    if (this.state.selected && !event.target.className.includes('chain')) {
+      this.props.onChange('unselect', {
+        type: 'option', id: this.props.id
+      })
+    }
+
     if (!String(event.target).includes('Input')) {
       this.setState({ ...this.state, isEditable: false, selected: false });
     }
@@ -77,7 +83,7 @@ export default class Option extends React.Component {
 
   render() {
     return (
-      <Card.Content extra id={this.props.id} onClick={this.handleSelect} className={this.state.selected ? 'teal-bg' : ''}>
+      <Card.Content extra id={this.props.id} className={this.state.selected ? 'teal-bg' : ''}>
         {this.state.isEditable
           ? (
             <Input focus value={this.state.text} onChange={this.handleChange} />
@@ -87,8 +93,9 @@ export default class Option extends React.Component {
               content='Double click for edit' trigger={
                 <p onDoubleClick={this.handleToggleInput}>
                   {this.state.text}
-                  {this.state.next != '0' ? <Icon link name='cut' color='black' className='op-icon' onClick={this.handleCut} /> : false}
                   <Icon link name='delete' color='red' className='op-icon' onClick={this.handleRemove} />
+                  <Icon link name='chain' color='teal' className='op-icon' onClick={this.handleSelect} />
+                  {this.state.next != '0' ? <Icon link name='cut' color='black' className='op-icon' onClick={this.handleCut} /> : false}
                 </p>
               }
             />

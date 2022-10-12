@@ -8,6 +8,14 @@ export function cardIdFromOptionId(id) {
     return id.split('o')[0]
 }
 
+export function cardsRefreshed(cards) {
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].token = nanoid();
+    }
+
+    return cards
+}
+
 export function addedEmptyCardArray(cards) {
     cards.push({
         id: 'c' + (cards.length + 1).toString(),
