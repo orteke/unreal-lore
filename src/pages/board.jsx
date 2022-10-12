@@ -8,7 +8,6 @@ import { Grid } from 'semantic-ui-react'
 import { nanoid } from 'nanoid'
 import DialogCard from '../components/dialogCard'
 import Char from '../components/char'
-import loreJSON from '../peder.json'
 
 export default class Board extends React.Component {
   constructor(props) {
@@ -24,6 +23,7 @@ export default class Board extends React.Component {
   onChange(action, data) {
     console.log('action', action)
 
+    let character = this.state.character
     let cards = this.state.cards
     let lines = this.state.lines
     let selected = this.state.selected
@@ -32,9 +32,9 @@ export default class Board extends React.Component {
       case 'input':
         switch (data.type) {
           case 'character':
-            this.setState({ ...this.state, character: data.character });
+            character = data.character
 
-            return
+            break
           case 'card':
             cards[cardUtils.cardIndexFromId(data.id)].hint = data.hint;
 
@@ -119,7 +119,7 @@ export default class Board extends React.Component {
         break
     }
 
-    loreUtils.updateLore(cards);
+    loreUtils.updateLore(cards, character);
     this.setState({ ...this.state, lines: lines, cards: cards, selected: selected });
   }
 

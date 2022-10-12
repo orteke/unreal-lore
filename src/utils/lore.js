@@ -1,6 +1,7 @@
-export function updateLore(cards) {
+export function updateLore(cards, character) {
     let lore = getLore();
     lore.cards = cards;
+    lore.character = character;
     localStorage.setItem('lore', JSON.stringify(lore));
 }
 
@@ -42,4 +43,23 @@ export function exportJSON(obj, filename) {
     // clean up "a" element & remove ObjectURL
     document.body.removeChild(link);
     URL.revokeObjectURL(href);
+}
+
+export function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        if (file.type.split('/')[0] !== 'image') {
+            alert("you can only use image files!");
+
+            return
+        }
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
+
+export function isFileImage(file) {
+    return file && file['type'].split('/')[0] === 'image';
 }
