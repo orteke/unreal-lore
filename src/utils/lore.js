@@ -45,6 +45,34 @@ export function exportJSON(obj, filename) {
     URL.revokeObjectURL(href);
 }
 
+export function exportUEDatatable(obj, filename) {
+    let datatable = [];
+    for (let i = 0; i < obj.cards.length; i++) {
+        let d = {
+            Name: i + 1,
+            hint: obj.cards[i].hint,
+            ops: []
+        };
+
+        for (let j = 0; j < obj.cards[i].ops.length; j++) {
+            let next = obj.cards[i].ops[j].next;
+            console.log('asdasdasdasasd', next);
+            if (next.substring(0, 1) == 'c') {
+                next = next.substring(1);
+            }
+
+            d.ops.push({
+                text: obj.cards[i].ops[j].text,
+                next: parseInt(next),
+            })
+        }
+
+        datatable.push(d);
+    }
+
+    return exportJSON(datatable, filename)
+}
+
 export function getBase64(file) {
     return new Promise((resolve, reject) => {
         if (file.type.split('/')[0] !== 'image') {

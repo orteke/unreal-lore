@@ -185,7 +185,7 @@ export default class Char extends React.Component {
               <Icon name='download' />
               JSON
             </Button>
-            <Button icon labelPosition='left' className='feature-button' color='teal'>
+            <Button icon labelPosition='left' className='feature-button' color='black' onClick={this.props.handleExportUEDataTable}>
               <Icon name='table' />
               UE-DataTable
             </Button>

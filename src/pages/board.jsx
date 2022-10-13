@@ -127,6 +127,10 @@ export default class Board extends React.Component {
     loreUtils.exportJSON(this.state, this.state.character.name);
   }
 
+  handleExportUEDataTable() {
+    loreUtils.exportUEDatatable(this.state, this.state.character.name);
+  }
+
   addLine(opId, line) {
     let lines = this.state.lines;
     lines[opId] = line;
@@ -145,6 +149,7 @@ export default class Board extends React.Component {
             <Char
               char={this.state.character}
               handleExportJSON={this.handleExportJSON.bind(this)}
+              handleExportUEDataTable={this.handleExportUEDataTable.bind(this)}
               onChange={this.onChange.bind(this)}
             />
           </Grid.Column>

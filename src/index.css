@@ -43,6 +43,11 @@ code {
   color: white !important;
 }
 
+.black-bg {
+  background-color: black !important;
+  color: white !important;
+}
+
 .grey-bg {
   background-color: #9e9e9e !important;
   color: white !important;

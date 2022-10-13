@@ -5,7 +5,7 @@ import orteke from '../images/orteke.jpg'
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 import {
-  Grid, Image, Segment, Header, Icon, Button, Divider, Search, Container, Rail
+  Grid, Image, Segment, Header, Icon, Button, Divider, Search, Container, Rail, Modal
 } from 'semantic-ui-react'
 
 export default class Board extends React.Component {
@@ -19,14 +19,25 @@ export default class Board extends React.Component {
 
     this.state = {
       lores: lores,
+      showModal: false,
     }
 
     this.handleAddDocument = this.handleAddDocument.bind(this)
     this.handleCreateEmptyBoard = this.handleCreateEmptyBoard.bind(this)
+    this.handleStartLore = this.handleStartLore.bind(this)
+    this.handleStopLore = this.handleStopLore.bind(this)
   }
 
   componentDidMount() {
     console.log('componentDidMount() lifecycle', this.state)
+  }
+
+  handleStartLore() {
+    this.setState({ ...this.state, showModal: true });
+  }
+
+  handleStopLore() {
+    this.setState({ ...this.state, showModal: false });
   }
 
   handleAddDocument() {
@@ -63,6 +74,8 @@ export default class Board extends React.Component {
               </Header>
               <div>
                 <p className='description'>
+                  <Image src='https://res.cloudinary.com/dukp6c7f7/image/upload/f_auto,fl_lossy,q_auto/s3-ghost//2019/02/Settings-Sync.gif' size='massive' />
+
                   UL özellikle rpg oyunları gibi karmaşık ve alternatif seçenekli diyalogları yazmak için geliştirilmiştir.
                   Oyun senaryosunu yazarken diyalogların nasıl ilerleyeceğini görsel olarak görebilirsiniz.
                   Aşırı kısa veya aşırı uzun diyalog akışlarını tespit edebilirsiniz.
@@ -71,29 +84,39 @@ export default class Board extends React.Component {
                 </p>
               </div>
 
-              <Segment placeholder className='grey-bg'>
-                <Grid columns={2} stackable textAlign='center'>
-                  <Divider vertical>Or</Divider>
 
-                  <Grid.Row verticalAlign='middle'>
-                    <Grid.Column>
-                      <Header icon>
-                        <Icon name='upload' />
-                        Upload a lore file
-                      </Header>
-                      <Button className='teal-bg' onClick={this.handleAddDocument}>Add Document</Button>
-                    </Grid.Column>
+              <Modal
+                open={this.state.showModal}
+                trigger={<Button className="ui massive button teal-bg" onClick={this.handleStartLore}>Let's Start Your Lore</Button>}
+              >
+                <Modal.Header>Select a Photo</Modal.Header>
+                <Modal.Content image>
+                  <Image size='medium' src='/images/avatar/large/rachel.png' wrapped />
+                  <Modal.Description>
+                    <Header>Default Profile Image</Header>
+                    <p>
+                      We've found the following gravatar image associated with your e-mail
+                      address.
+                    </p>
+                    <p>Is it okay to use this photo?</p>
+                  </Modal.Description>
+                </Modal.Content>
+                <Modal.Actions>
+                  <Button color='black' onClick={this.handleStopLore}>
+                    Nope
+                  </Button>
+                  <Button
+                    content="Yep, that's me"
+                    labelPosition='right'
+                    icon='checkmark'
+                    positive
+                    onClick={this.handleStopLore}
+                  />
+                </Modal.Actions>
+              </Modal>
 
-                    <Grid.Column>
-                      <Header icon>
-                        <Icon name='pin' />
-                        Let's start a new lore
-                      </Header>
-                      <Button className='teal-bg' onClick={this.handleCreateEmptyBoard}>Create Empty Board</Button>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-              </Segment>
+              {/* <Segment placeholder className='grey-bg'>
+              </Segment> */}
 
               <div>
                 <Header as='h2' className='white-text'>Unreal Engine Entegrasyonu</Header>
@@ -118,8 +141,8 @@ export default class Board extends React.Component {
 
             </Container>
           </Grid.Column>
-        </Grid>
-      </div>
+        </Grid >
+      </div >
     )
   }
 }

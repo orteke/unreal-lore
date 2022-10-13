@@ -10,7 +10,7 @@ export function addedEmptyOptionArray(options, cardId) {
         id: cardId + 'o' + (options.length + 1).toString(),
         token: nanoid(),
         text: 'input text',
-        next: 0
+        next: '0'
     })
 
     return options
