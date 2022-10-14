@@ -72,7 +72,7 @@ export default class Board extends React.Component {
       case 'remove':
         switch (data.type) {
           case 'card':
-            lines = lineUtils.removedLinesByCardIdArray(lines, cards, data.id);
+            lines = lineUtils.removedLinesArray(lines);
             cards = cardUtils.removedCardByIdArray(cards, data.id);
 
             break

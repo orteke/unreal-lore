@@ -9,6 +9,14 @@ export function removedGivenLineByIdArray(lines, id) {
     return lines
 }
 
+export function removedLinesArray(lines) {
+    for (const [key, value] of Object.entries(lines)) {
+        lines = removedGivenLineByIdArray(lines, key)
+    }
+
+    return lines
+}
+
 export function removedLinesByCardIdArray(lines, cards, cardId) {
     for (let i = 0; i < cards.length; i++) {
         for (let j = 0; j < cards[i].ops.length; j++) {

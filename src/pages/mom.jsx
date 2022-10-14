@@ -143,7 +143,7 @@ export default class Board extends React.Component {
                               <Header icon>
                                 Let's start a new lore
                               </Header>
-                              <Button className='teal-bg' onClick={this.handleCreateEmptyBoard}>Create</Button>
+                              <Button className='teal' onClick={this.handleCreateEmptyBoard}>Create</Button>
                             </Grid.Column>
                           </Grid.Row>
                         </Grid>
