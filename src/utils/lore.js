@@ -1,29 +1,38 @@
 export function updateLore(cards, character) {
     let lore = getLore();
+    let lores = JSON.parse(localStorage.getItem('lores'));
+    if (lores == null) {
+        lores = {};
+    }
+
     lore.cards = cards;
     lore.character = character;
+    lores[lore.character.name] = lore;
+
     localStorage.setItem('lore', JSON.stringify(lore));
+    localStorage.setItem('lores', JSON.stringify(lores));
 }
 
 export function getLore() {
     let lore = JSON.parse(localStorage.getItem('lore'));
     if (lore == null) {
-        let lores = JSON.parse(localStorage.getItem('lores'));
-        if (lores == null) {
-            lores = [];
-        }
-
-        lore = {
-            "character": {
-                "name": 'new char_' + lores.length.toString(),
-                "imageUrl": "",
-                "role": "define a role",
-                "description": "input a description"
-            },
-            "cards": []
-        }
-        localStorage.setItem('lore', JSON.stringify(lore));
+        lore = emptyLore(0);
+        appendLore(lore);
     }
+
+    return lore;
+}
+
+export function appendLore(lore) {
+    let lores = JSON.parse(localStorage.getItem('lores'));
+    if (lores == null) {
+        lores = {};
+    }
+
+    lores[lore.character.name] = lore;
+    localStorage.setItem('lores', JSON.stringify(lores));
+    localStorage.setItem('lore', JSON.stringify(lore));
+
 
     return lore;
 }
@@ -90,4 +99,86 @@ export function getBase64(file) {
 
 export function isFileImage(file) {
     return file && file['type'].split('/')[0] === 'image';
+}
+
+export function emptyLore(index) {
+    return {
+        "character": {
+            "name": 'new char_' + index.toString(),
+            "imageUrl": "",
+            "role": "define a role",
+            "description": "input a description"
+        },
+        "cards": [
+            {
+                "id": "c1",
+                "token": "va5QGUXgWwy-RS1FIkJCk",
+                "hint": "Hello",
+                "position": {
+                    "x": 40,
+                    "y": 30
+                },
+                "ops": [
+                    {
+                        "id": "c1o1",
+                        "token": "cSPtozdb5KOPhXfHZDz9A",
+                        "text": "Hi",
+                        "next": "c2"
+                    },
+                    {
+                        "id": "c1o2",
+                        "token": "kUS_QP6w-TK-NVshS4NM3",
+                        "text": "Where is the princess?",
+                        "next": "c3"
+                    }
+                ]
+            },
+            {
+                "id": "c2",
+                "token": "IT67OZKiszqmbr40XDMmm",
+                "hint": "Do you want learn where is the princess?",
+                "position": {
+                    "x": 560,
+                    "y": 88
+                },
+                "ops": [
+                    {
+                        "id": "c2o1",
+                        "token": "aDf8kvF5EgEv66l67h09Q",
+                        "text": "Yes",
+                        "next": "c3"
+                    },
+                    {
+                        "id": "c2o2",
+                        "token": "i-v9s5YUV9t3HgMtF8Rpd",
+                        "text": "No",
+                        "next": "0"
+                    }
+                ]
+            },
+            {
+                "id": "c3",
+                "token": "kNbZv7tBkOTyiUO4Y1czB",
+                "hint": "Princess is another...",
+                "position": {
+                    "x": 84,
+                    "y": 94
+                },
+                "ops": [
+                    {
+                        "id": "c3o1",
+                        "token": "-JxDsbZDXxTa4u6BKviva",
+                        "text": "f***",
+                        "next": "0"
+                    },
+                    {
+                        "id": "c3o2",
+                        "token": "bkKclA0lgMFnSDuiZAj8e",
+                        "text": "Give me an address",
+                        "next": "0"
+                    }
+                ]
+            }
+        ]
+    }
 }

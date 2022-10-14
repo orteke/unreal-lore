@@ -1,11 +1,14 @@
 import '../index.css'
 import ozan from '../images/ozan.gif'
 import logo from '../images/logo512.png'
+import wireframe from '../images/wireframe.png'
+import bp from '../images/bp.jpg'
 import orteke from '../images/orteke.jpg'
+import * as loreUtils from '../utils/lore.js'
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 import {
-  Grid, Image, Segment, Header, Icon, Button, Divider, Search, Container, Rail, Modal
+  Grid, Image, Segment, Header, Icon, Button, Divider, Search, Container, Rail, Modal, List
 } from 'semantic-ui-react'
 
 export default class Board extends React.Component {
@@ -14,7 +17,7 @@ export default class Board extends React.Component {
 
     let lores = JSON.parse(localStorage.getItem('lores'));
     if (lores == null) {
-      lores = [];
+      lores = {};
     }
 
     this.state = {
@@ -26,6 +29,7 @@ export default class Board extends React.Component {
     this.handleCreateEmptyBoard = this.handleCreateEmptyBoard.bind(this)
     this.handleStartLore = this.handleStartLore.bind(this)
     this.handleStopLore = this.handleStopLore.bind(this)
+    this.handleSelectLore = this.handleSelectLore.bind(this)
   }
 
   componentDidMount() {
@@ -40,20 +44,23 @@ export default class Board extends React.Component {
     this.setState({ ...this.state, showModal: false });
   }
 
+  handleSelectLore(lore) {
+    localStorage.setItem('lore', JSON.stringify(lore));
+    window.location.href = 'board';
+  }
+
   handleAddDocument() {
     window.location.href = 'board'
   }
 
   handleCreateEmptyBoard() {
-    localStorage.setItem('lore', JSON.stringify({
-      "character": {
-        "name": 'new char_' + this.state.lores.length.toString(),
-        "imageUrl": "",
-        "role": "define a role",
-        "description": "input a description"
-      },
-      "cards": []
-    }));
+    let lore = loreUtils.emptyLore(Object.keys(this.state.lores).length);
+    let lores = this.state.lores;
+    lores[lore.character.name] = lore;
+
+    localStorage.setItem('lore', JSON.stringify(lore));
+    localStorage.setItem('lores', JSON.stringify(lores));
+
     window.location.href = 'board'
   }
 
@@ -70,68 +77,115 @@ export default class Board extends React.Component {
             <Container textAlign='left' className='howto'>
               <Header as='h1' icon textAlign='center'>
                 <Image src={logo} size='massive' circular />
-                <Header.Content className='white-text'>Unreal Lore</Header.Content>
+                <Header.Content className='white-text'>Unreal Lore</Header.Content><br />
               </Header>
-              <div>
-                <p className='description'>
-                  <Image src='https://res.cloudinary.com/dukp6c7f7/image/upload/f_auto,fl_lossy,q_auto/s3-ghost//2019/02/Settings-Sync.gif' size='massive' />
+              <div className='hidden-scroll'>
+                <div>
+                  <p className='description'>
+                    <Image src='https://res.cloudinary.com/dukp6c7f7/image/upload/f_auto,fl_lossy,q_auto/s3-ghost//2019/02/Settings-Sync.gif' size='massive' />
+                    <br />
 
-                  UL özellikle rpg oyunları gibi karmaşık ve alternatif seçenekli diyalogları yazmak için geliştirilmiştir.
-                  Oyun senaryosunu yazarken diyalogların nasıl ilerleyeceğini görsel olarak görebilirsiniz.
-                  Aşırı kısa veya aşırı uzun diyalog akışlarını tespit edebilirsiniz.
-                  Her bir karakter için ayrı bir diyalog boardu oluşturursunuz ve kolayca aklınızda olan
-                  hikayeyi yazmaya başlarsınız.
-                </p>
-              </div>
+                    UL özellikle rpg oyunları gibi uzun ve alternatif seçenekli diyalogları yazmak için geliştirilmiştir.<br /><br />
+                    - Oyun senaryosunu yazarken diyalogların nasıl ilerleyeceğini görsel olarak görebilirsiniz. <br />
+                    - Aşırı kısa veya aşırı uzun diyalog akışlarını tespit edebilirsiniz.<br />
+                    - Her bir karakter için ayrı bir diyalog boardu oluşturursunuz ve kolayca aklınızda olan
+                    hikayeyi yazmaya başlarsınız.<br />
+                  </p>
+                </div><br />
 
+                <Modal
+                  className='modal'
+                  open={this.state.showModal}
+                  trigger={
+                    <Button className="ui massive button teal-bg" animated='fade' onClick={this.handleStartLore}>
+                      <Button.Content visible>Let's Start Your Lore</Button.Content>
+                      <Button.Content hidden><Icon name='write' />Ready?</Button.Content>
+                    </Button>
+                  }
+                >
+                  <Modal.Content image>
+                    <Modal.Description>
+                      <Header>History</Header>
+                      {this.state.lores.length == 0 ?
+                        (<p>Not found</p>) :
+                        (<List>
 
-              <Modal
-                open={this.state.showModal}
-                trigger={<Button className="ui massive button teal-bg" onClick={this.handleStartLore}>Let's Start Your Lore</Button>}
-              >
-                <Modal.Header>Select a Photo</Modal.Header>
-                <Modal.Content image>
-                  <Image size='medium' src='/images/avatar/large/rachel.png' wrapped />
-                  <Modal.Description>
-                    <Header>Default Profile Image</Header>
-                    <p>
-                      We've found the following gravatar image associated with your e-mail
-                      address.
-                    </p>
-                    <p>Is it okay to use this photo?</p>
-                  </Modal.Description>
-                </Modal.Content>
-                <Modal.Actions>
-                  <Button color='black' onClick={this.handleStopLore}>
-                    Nope
-                  </Button>
-                  <Button
-                    content="Yep, that's me"
-                    labelPosition='right'
-                    icon='checkmark'
-                    positive
-                    onClick={this.handleStopLore}
-                  />
-                </Modal.Actions>
-              </Modal>
+                          {Object.keys(this.state.lores).map((charName, i) =>
+                            <List.Item key={this.state.lores[charName].character.name} onClick={() => this.handleSelectLore(this.state.lores[charName])}>
+                              <Image avatar src={this.state.lores[charName].character.imageUrl !== '' ? this.state.lores[charName].character.imageUrl : wireframe} />
 
-              {/* <Segment placeholder className='grey-bg'>
-              </Segment> */}
+                              <List.Content>
+                                <List.Header as='a'>{this.state.lores[charName].character.name}</List.Header>
+                                <List.Description>
+                                  {this.state.lores[charName].character.description}
+                                </List.Description>
+                              </List.Content>
+                            </List.Item>
+                          )}
+                        </List>)
+                      }
 
-              <div>
-                <Header as='h2' className='white-text'>Unreal Engine Entegrasyonu</Header>
-                <p>
-                  Dialog boardunda bulunan UE export seçeneği ile dialog'u export edebilirsiniz.
-                  Ardından aşağıda linkleri bulunan unreal engine ile uyumlu data table dosyalarını kullanarak
-                  oyun projenize ekleyebilirsiniz. Oyun içinde nasıl kullanacağınıza kendiniz karar vermelisiniz.
-                </p>
-                <Header as='h2' className='white-text'>Dialog Kartları</Header>
-                <p>
-                  Oyuncunun konuşabilieceği her karak ter için bir karakter boardu oluşturulur.
-                  Dialog boardlarında kartlar bulunur. Kartların hint bölümü oyuncunun konuşacağı karakterin söyleyeceği sözü içerir.
-                  Her kartta istediğiniz kadar seçenek ekleyebilirsiniz. Bu seçenekleri diğer kartlara bağlayarak akışı oluşturursunuz.
-                  Json formatında yada diğer export seçenekleri ile istediğiniz gibi kullanabilirsiniz.
-                </p>
+                    </Modal.Description>
+                    <Modal.Description>
+                      <Segment placeholder>
+                        <Grid columns={2} stackable textAlign='center'>
+                          <Divider vertical>Or</Divider>
+
+                          <Grid.Row verticalAlign='middle'>
+                            <Grid.Column>
+                              <Header icon>
+                                Upload a document for restore lore
+                              </Header>
+                              <Button className='teal-bg'>Select Document</Button>
+                            </Grid.Column>
+
+                            <Grid.Column>
+                              <Header icon>
+                                Let's start a new lore
+                              </Header>
+                              <Button className='teal-bg' onClick={this.handleCreateEmptyBoard}>Create</Button>
+                            </Grid.Column>
+                          </Grid.Row>
+                        </Grid>
+                      </Segment>
+                    </Modal.Description>
+                  </Modal.Content>
+                  <Modal.Actions>
+                    <Button color='black' onClick={this.handleStopLore}>
+                      Close
+                    </Button>
+                  </Modal.Actions>
+                </Modal><br /><br />
+
+                <div>
+                  <Header as='h2' className='white-text'>Unreal Engine ile Kullanım</Header><br />
+                  <Image src={bp} size='massive' /><br />
+                  <p>
+                    Dialog boardunda bulunan UE datatable export seçeneği ile dialog'u export edebilirsiniz.
+                    Ardından aşağıda linkleri bulunan unreal engine ile uyumlu data table dosyalarını kullanarak
+                    oyun projenize ekleyebilirsiniz. Oyun içinde nasıl kullanacağınıza kendiniz karar vermelisiniz.<br /> <br />
+                    <a href='' className='teal'>- Example BP </a><br />
+                    <a href='' className='teal'>- Card Data Table </a><br />
+                    <a href='' className='teal'>- Option Data Table</a> <br />
+                  </p>
+                  <Header as='h2' className='white-text'>How it works?</Header>
+                  <p>
+                    Oyuncunun konuşabilieceği her karakter için bir karakter boardu oluşturulur.
+                    Daha sonra bu fiyalog dosyasını export ederek istediğiniz gibi kullanabilirsiniz.
+                    Olluşturduğunuz tüm boardlar browserda saklanır. Doğal olarak bu board bilgilerini kaybedebilirsiniz.
+                    Endişelenmeyin, export ettiğiniz dosyaları saklayarak ihtiyaç duyduğunuzda geri yükleyip board için kaldığınız yerden devam edebilirsiniz.
+                  </p>
+                  <Header as='h4' className='white-text'>Cards</Header>
+                  <p>Cardların hint denilen bölümü karakterin oyuncuya söyleyeceği sözü yada soruyu içerir.
+                    Kartlar sıralıdır ve her bir kart silindiğinde sıra güncellenir.</p>
+                  <Header as='h4' className='white-text'>Options</Header>
+                  <p>Optionlar oyuncunun karaktere vereceği cevabı içerir. Her kart içerisinde istediğiniz sayıda oluşturabilirsiniz.
+                    Her option bir karta bağlanır ve bu sayede diyalog akışı sağlanır. Her optionın bir karta bağlanması zorunlu değildir.
+                    Bu durumda diyalog bitti demektir. Bu özellikle bir board içerisinde birden fazla diyalog akışı oluşturabilirsiniz.
+                    Bir karta bağlanmayan option'ın next değeri '0' olur.</p>
+                  <Header as='h4' className='white-text'>Lines</Header>
+                  <p>Linelar bir optionı bir karta bağlar. kesilebilir ve tekrar başka kartlara bağlanabilirler.</p>
+                </div>
               </div>
               <Segment className='orteke'>
                 <p>

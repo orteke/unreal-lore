@@ -43,6 +43,10 @@ code {
   color: white !important;
 }
 
+.teal:hover {
+  color: #0aeeee !important;
+}
+
 .black-bg {
   background-color: black !important;
   color: white !important;
@@ -77,4 +81,18 @@ code {
 
 .howto {
   padding-top: 100px;
+}
+
+.hidden-scroll {
+  overflow-y: scroll;
+  height: 100vh !important;
+}
+
+.hidden-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.hidden-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -25,6 +25,7 @@ export default class Char extends React.Component {
     this.handleAddCard = this.addCard.bind(this)
     this.onImageClick = this.onImageClick.bind(this)
     this.onChangeFile = this.onChangeFile.bind(this)
+    this.handleBack = this.handleBack.bind(this)
   }
 
   componentDidMount() {
@@ -45,6 +46,10 @@ export default class Char extends React.Component {
     this.props.onChange('add', {
       type: 'card'
     })
+  }
+
+  handleBack() {
+    window.location.href = '/'
   }
 
   handleNameChange(event) {
@@ -177,6 +182,10 @@ export default class Char extends React.Component {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
+            <Button icon labelPosition='left' className='feature-button' color='teal-bg' onClick={this.handleBack}>
+              <Icon name='arrow alternate circle left' />
+              Back
+            </Button>
             <Button icon labelPosition='left' className='feature-button' color='blue' onClick={this.handleAddCard}>
               <Icon name='plus' />
               Card
