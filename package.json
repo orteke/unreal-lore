@@ -2,6 +2,11 @@
   "name": "unreal-lore",
   "version": "0.1.0",
   "private": true,
+  "author": "Cem KIY",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orteke/unreal-lore"
+  },
   "dependencies": {
     "@semantic-ui-react/css-patch": "^1.1.2",
     "@testing-library/jest-dom": "^5.16.5",
