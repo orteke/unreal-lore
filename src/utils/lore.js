@@ -77,7 +77,6 @@ export function exportUEDatatable(obj, filename) {
 
         for (let j = 0; j < obj.cards[i].ops.length; j++) {
             let next = obj.cards[i].ops[j].next;
-            console.log('asdasdasdasasd', next);
             if (next.substring(0, 1) == 'c') {
                 next = next.substring(1);
             }
