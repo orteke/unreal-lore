@@ -66,8 +66,10 @@ code {
 }
 
 .gif {
-  padding-top: 20vh;
-  height: 100vh !important;
+  padding-top: 10%;
+  padding-left: 35%;
+  height: 100% !important;
+  width: 100% !important;
 }
 
 .orteke {
@@ -95,4 +97,12 @@ code {
 .hidden-scroll {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.ozan {
+  height: 100vh;
+  background-image: url("/static/media/ozan.18080d9d.gif");
+  background-repeat: no-repeat;
+  background-size: 70vh 125vh;
+  background-position: center;
 }

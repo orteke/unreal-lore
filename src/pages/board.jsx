@@ -32,6 +32,7 @@ export default class Board extends React.Component {
       case 'input':
         switch (data.type) {
           case 'character':
+            loreUtils.removeLore(character.name);
             character = data.character
 
             break

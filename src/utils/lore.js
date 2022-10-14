@@ -1,9 +1,6 @@
 export function updateLore(cards, character) {
     let lore = getLore();
-    let lores = JSON.parse(localStorage.getItem('lores'));
-    if (lores == null) {
-        lores = {};
-    }
+    let lores = getLores();
 
     lore.cards = cards;
     lore.character = character;
@@ -23,11 +20,26 @@ export function getLore() {
     return lore;
 }
 
-export function appendLore(lore) {
+export function getLores() {
     let lores = JSON.parse(localStorage.getItem('lores'));
     if (lores == null) {
         lores = {};
     }
+
+    return lores;
+}
+
+export function removeLore(loreName) {
+    let lores = getLores();
+
+    if (lores.hasOwnProperty(loreName)) {
+        delete lores[loreName];
+        localStorage.setItem('lores', JSON.stringify(lores));
+    }
+}
+
+export function appendLore(lore) {
+    let lores = getLores();
 
     lores[lore.character.name] = lore;
     localStorage.setItem('lores', JSON.stringify(lores));

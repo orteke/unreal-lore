@@ -8,32 +8,56 @@ import * as loreUtils from '../utils/lore.js'
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 import {
-  Grid, Image, Segment, Header, Icon, Button, Divider, Search, Container, Rail, Modal, List
+  Grid, Image, Segment, Header, Icon, Button, Divider, Search, Container, Rail, Modal, List, Popup, Label, Sticky
 } from 'semantic-ui-react'
 
 export default class Board extends React.Component {
   constructor(props) {
     super(props)
 
-    let lores = JSON.parse(localStorage.getItem('lores'));
-    if (lores == null) {
-      lores = {};
-    }
+    let lores = loreUtils.getLores();
 
     this.state = {
       lores: lores,
       showModal: false,
     }
 
-    this.handleAddDocument = this.handleAddDocument.bind(this)
     this.handleCreateEmptyBoard = this.handleCreateEmptyBoard.bind(this)
     this.handleStartLore = this.handleStartLore.bind(this)
     this.handleStopLore = this.handleStopLore.bind(this)
     this.handleSelectLore = this.handleSelectLore.bind(this)
+    this.onChangeFile = this.onChangeFile.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
   }
 
   componentDidMount() {
     console.log('componentDidMount() lifecycle', this.state)
+  }
+
+  onChangeFile(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    var file = event.target.files[0];
+    if (file.type !== 'application/json') {
+      alert('you could restore only json file');
+    }
+
+    let read = new FileReader();
+    read.readAsText(file);
+    read.onloadend = function () {
+      let lore = JSON.parse(read.result);
+      if (lore.hasOwnProperty("character") && lore.hasOwnProperty("cards")) {
+        alert('file is not a fit lore schema!');
+      }
+
+      loreUtils.appendLore(lore);
+      window.location.href = 'board';
+    }
+  }
+
+  handleRemove(loreName) {
+    loreUtils.removeLore(loreName);
+    this.setState({ ...this.state, lores: loreUtils.getLores() });
   }
 
   handleStartLore() {
@@ -47,10 +71,6 @@ export default class Board extends React.Component {
   handleSelectLore(lore) {
     localStorage.setItem('lore', JSON.stringify(lore));
     window.location.href = 'board';
-  }
-
-  handleAddDocument() {
-    window.location.href = 'board'
   }
 
   handleCreateEmptyBoard() {
@@ -68,16 +88,91 @@ export default class Board extends React.Component {
     return (
       <div className='orteke'>
         <Grid>
-          <Grid.Column width={6}>
-            <div className='grey-bg gif' >
-              <Image src={ozan} />
+          <Grid.Column width={6} className='grey-bg'>
+            <div className='gif magic-button ozan' >
+              <Modal
+                className='modal'
+                open={this.state.showModal}
+                trigger={
+                  <Sticky>
+                    <Button className="ui massive button teal-bg" animated='fade' onClick={this.handleStartLore}>
+                      <Button.Content visible>Let's Start Your Lore</Button.Content>
+                      <Button.Content hidden>Ready?</Button.Content>
+                    </Button>
+                  </Sticky>
+
+                }
+              >
+                <Modal.Content image>
+                  <Modal.Description>
+                    <Header>History</Header>
+                    {this.state.lores.length == 0 ?
+                      (<p>Not found</p>) :
+                      (<List>
+                        {Object.keys(this.state.lores).map((charName, i) =>
+                          <List.Item key={this.state.lores[charName].character.name}>
+                            <Image avatar src={this.state.lores[charName].character.imageUrl !== '' ? this.state.lores[charName].character.imageUrl : wireframe} />
+
+                            <List.Content>
+                              <List.Header as='a' onClick={() => this.handleSelectLore(this.state.lores[charName])}>
+                                {this.state.lores[charName].character.name}
+                              </List.Header>
+                              <List.Description>
+                                {this.state.lores[charName].character.description}
+                              </List.Description>
+                              <List.Description>
+                                <Icon link name='delete' color='red' onClick={() => this.handleRemove(charName)} />
+                              </List.Description>
+                            </List.Content>
+                          </List.Item>
+                        )}
+                      </List>)
+                    }
+
+                  </Modal.Description>
+                  <Modal.Description>
+                    <Segment placeholder>
+                      <Grid columns={2} stackable textAlign='center'>
+                        <Divider vertical>Or</Divider>
+
+                        <Grid.Row verticalAlign='middle'>
+                          <Grid.Column>
+                            <Header icon>
+                              Restore a document
+                            </Header>
+                            <Button className='teal-bg' onClick={() => { this.upload.click() }}>Upload</Button>
+                            <input id="myInput"
+                              type="file"
+                              ref={(ref) => this.upload = ref}
+                              style={{ display: 'none' }}
+                              onChange={this.onChangeFile.bind(this)}
+                            />
+                          </Grid.Column>
+
+                          <Grid.Column>
+                            <Header icon>
+                              Let's start a new lore
+                            </Header>
+                            <Button className='teal-bg' onClick={this.handleCreateEmptyBoard}>Create</Button>
+                          </Grid.Column>
+                        </Grid.Row>
+                      </Grid>
+                    </Segment>
+                  </Modal.Description>
+                </Modal.Content>
+                <Modal.Actions>
+                  <Button color='black' onClick={this.handleStopLore}>
+                    Close
+                  </Button>
+                </Modal.Actions>
+              </Modal>
             </div>
           </Grid.Column>
           <Grid.Column width={10}>
             <Container textAlign='left' className='howto'>
               <Header as='h1' icon textAlign='center'>
                 <Image src={logo} size='massive' circular />
-                <Header.Content className='white-text'>Unreal Lore</Header.Content><br />
+                <Header.Content className='white-text'>Unreal Lore(Alpha v0.876)</Header.Content><br />
               </Header>
               <div className='hidden-scroll'>
                 <div>
@@ -92,70 +187,6 @@ export default class Board extends React.Component {
                     hikayeyi yazmaya başlarsınız.<br />
                   </p>
                 </div><br />
-
-                <Modal
-                  className='modal'
-                  open={this.state.showModal}
-                  trigger={
-                    <Button className="ui massive button teal-bg" animated='fade' onClick={this.handleStartLore}>
-                      <Button.Content visible>Let's Start Your Lore</Button.Content>
-                      <Button.Content hidden><Icon name='write' />Ready?</Button.Content>
-                    </Button>
-                  }
-                >
-                  <Modal.Content image>
-                    <Modal.Description>
-                      <Header>History</Header>
-                      {this.state.lores.length == 0 ?
-                        (<p>Not found</p>) :
-                        (<List>
-
-                          {Object.keys(this.state.lores).map((charName, i) =>
-                            <List.Item key={this.state.lores[charName].character.name} onClick={() => this.handleSelectLore(this.state.lores[charName])}>
-                              <Image avatar src={this.state.lores[charName].character.imageUrl !== '' ? this.state.lores[charName].character.imageUrl : wireframe} />
-
-                              <List.Content>
-                                <List.Header as='a'>{this.state.lores[charName].character.name}</List.Header>
-                                <List.Description>
-                                  {this.state.lores[charName].character.description}
-                                </List.Description>
-                              </List.Content>
-                            </List.Item>
-                          )}
-                        </List>)
-                      }
-
-                    </Modal.Description>
-                    <Modal.Description>
-                      <Segment placeholder>
-                        <Grid columns={2} stackable textAlign='center'>
-                          <Divider vertical>Or</Divider>
-
-                          <Grid.Row verticalAlign='middle'>
-                            <Grid.Column>
-                              <Header icon>
-                                Upload a document for restore lore
-                              </Header>
-                              <Button className='teal-bg'>Select Document</Button>
-                            </Grid.Column>
-
-                            <Grid.Column>
-                              <Header icon>
-                                Let's start a new lore
-                              </Header>
-                              <Button className='teal' onClick={this.handleCreateEmptyBoard}>Create</Button>
-                            </Grid.Column>
-                          </Grid.Row>
-                        </Grid>
-                      </Segment>
-                    </Modal.Description>
-                  </Modal.Content>
-                  <Modal.Actions>
-                    <Button color='black' onClick={this.handleStopLore}>
-                      Close
-                    </Button>
-                  </Modal.Actions>
-                </Modal><br /><br />
 
                 <div>
                   <Header as='h2' className='white-text'>Unreal Engine ile Kullanım</Header><br />
@@ -185,6 +216,70 @@ export default class Board extends React.Component {
                     Bir karta bağlanmayan option'ın next değeri '0' olur.</p>
                   <Header as='h4' className='white-text'>Lines</Header>
                   <p>Linelar bir optionı bir karta bağlar. kesilebilir ve tekrar başka kartlara bağlanabilirler.</p>
+                  <Header as='h2' className='white-text'>Upcoming Features</Header>
+                  <p>Unutma, her zaman ücretsiz sürümümüz olacaktır. Bu sayede gönül rahatlığıyla bu projeyi kullanabilirsin.<br /><br />
+                    - Cloud Store<br />
+                    - Google Drive Store<br />
+                    - UI/UX Improvements<br />
+                  </p>
+                  <Header as='h2' className='white-text'>Donate us</Header>
+                  <p> Unreal lore is started hobby project.
+                    But we have some expenses. We have to pay bills sended from NameCheap and Netlify.
+                    If you join us, you will be a great support. But we ask you to donate if there is a lot of money.</p>
+                  <List>
+                    <List.Item as='a' onClick={() => { navigator.clipboard.writeText('32mLAFhCJ8m75jsGtdwWK6B4ScKtKn6Avb') }}>
+                      <List.Content>
+                        <Popup
+                          content='copy to clipboard' trigger={
+                            <Label>
+                              <Icon name='bitcoin' />
+                              &nbsp;bitcoin
+                              <Label.Detail>32mLAFhCJ8m75jsGtdwWK6B4ScKtKn6Avb</Label.Detail>
+                            </Label>
+                          }
+                        />
+                      </List.Content>
+                    </List.Item>
+                    <List.Item as='a' onClick={() => { navigator.clipboard.writeText('0x8172Dd888EcBC9eBAF7dB95dB4e4b1Dc601E4B81') }}>
+                      <List.Content>
+                        <Popup
+                          content='copy to clipboard' trigger={
+                            <Label>
+                              <Icon name='ethereum' />
+                              &nbsp;ethereum
+                              <Label.Detail>0x8172Dd888EcBC9eBAF7dB95dB4e4b1Dc601E4B81</Label.Detail>
+                            </Label>
+                          }
+                        />
+                      </List.Content>
+                    </List.Item>
+                    <List.Item as='a' onClick={() => { navigator.clipboard.writeText('FMAIJ6XMJSCXNAN3UKJP5K34LW436ZMHYGWCFMCBLZWWIYMMV6V5SULX6A') }}>
+                      <List.Content>
+                        <Popup
+                          content='copy to clipboard' trigger={
+                            <Label>
+                              <Icon name='tablet' />
+                              &nbsp;algorand
+                              <Label.Detail>FMAIJ6XMJSCXNAN3UKJP5K34LW436ZMHYGWCFMCBLZWWIYMMV6V5SULX6A</Label.Detail>
+                            </Label>
+                          }
+                        />
+                      </List.Content>
+                    </List.Item>
+                    <List.Item as='a' onClick={() => { navigator.clipboard.writeText('GDQP2KPQGKIHYJGXNUIYOMHARUARCA7DJT5FO2FFOOKY3B2WSQHG4W37:::ucl:::362767634') }}>
+                      <List.Content>
+                        <Popup
+                          content='copy to clipboard' trigger={
+                            <Label>
+                              <Icon name='tablet' />
+                              &nbsp;stellar lumens
+                              <Label.Detail>GDQP2KPQGKIHYJGXNUIYOMHARUARCA7DJT5FO2FFOOKY3B2WSQHG4W37:::ucl:::362767634</Label.Detail>
+                            </Label>
+                          }
+                        />
+                      </List.Content>
+                    </List.Item>
+                  </List><br />
                 </div>
               </div>
               <Segment className='orteke'>

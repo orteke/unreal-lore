@@ -182,7 +182,7 @@ export default class Char extends React.Component {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Button icon labelPosition='left' className='feature-button' color='teal-bg' onClick={this.handleBack}>
+            <Button icon labelPosition='left' className='feature-button' color='teal' onClick={this.handleBack}>
               <Icon name='arrow alternate circle left' />
               Back
             </Button>
