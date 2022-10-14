@@ -12,7 +12,7 @@ export function updateLore(cards, character) {
 
 export function getLore() {
     let lore = JSON.parse(localStorage.getItem('lore'));
-    if (lore == null) {
+    if (lore === null) {
         lore = emptyLore(0);
         appendLore(lore);
     }
@@ -22,7 +22,7 @@ export function getLore() {
 
 export function getLores() {
     let lores = JSON.parse(localStorage.getItem('lores'));
-    if (lores == null) {
+    if (lores === null) {
         lores = {};
     }
 
@@ -77,7 +77,7 @@ export function exportUEDatatable(obj, filename) {
 
         for (let j = 0; j < obj.cards[i].ops.length; j++) {
             let next = obj.cards[i].ops[j].next;
-            if (next.substring(0, 1) == 'c') {
+            if (next.substring(0, 1) === 'c') {
                 next = next.substring(1);
             }
 

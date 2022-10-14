@@ -25,7 +25,7 @@ export default class Option extends React.Component {
 
   componentDidMount() {
     document.addEventListener('click', this.handleClickOutside, true);
-    if (this.state.next != '0') {
+    if (this.state.next !== '0') {
       let line = DrawLeaderLine({ startId: this.props.id, endId: this.state.next })
       this.props.addLine(this.state.id, line);
       this.setState({ ...this.state, line: line });
@@ -95,7 +95,7 @@ export default class Option extends React.Component {
                   {this.state.text}
                   <Icon link name='delete' color='red' className='op-icon' onClick={this.handleRemove} />
                   <Icon link name='chain' color='teal' className='op-icon' onClick={this.handleSelect} />
-                  {this.state.next != '0' ? <Icon link name='cut' color='black' className='op-icon' onClick={this.handleCut} /> : false}
+                  {this.state.next !== '0' ? <Icon link name='cut' color='black' className='op-icon' onClick={this.handleCut} /> : false}
                 </p>
               }
             />

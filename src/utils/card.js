@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 
 export function cardIndexFromId(id) {
-    if (id == '0') {
+    if (id === '0') {
         return 0
     }
 
@@ -46,10 +46,10 @@ export function reorderedCardsArray(cards, removedCardId) {
         for (let j = 0; j < cards[i].ops.length; j++) {
             cards[i].ops[j].id = cards[i].id + 'o' + (j + 1).toString()
             let nextCardIndex = cardIndexFromId(cards[i].ops[j].next);
-            if (cards[i].ops[j].next == removedCardId) {
+            if (cards[i].ops[j].next === removedCardId) {
                 cards[i].ops[j].next = '0';
             } else if (nextCardIndex >= removedCardIndex) {
-                if (cards[i].ops[j].next == '0' || cards[i].ops[j].next == 'c1') {
+                if (cards[i].ops[j].next === '0' || cards[i].ops[j].next === 'c1') {
                     continue
                 }
 

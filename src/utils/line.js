@@ -1,4 +1,3 @@
-import * as cardUtils from '../utils/card.js'
 
 export function removedGivenLineByIdArray(lines, id) {
     if (lines.hasOwnProperty(id)) {
@@ -10,9 +9,11 @@ export function removedGivenLineByIdArray(lines, id) {
 }
 
 export function removedLinesArray(lines) {
+    /* eslint-disable no-unused-vars */
     for (const [key, value] of Object.entries(lines)) {
         lines = removedGivenLineByIdArray(lines, key)
     }
+    /* eslint-enable no-unused-vars */
 
     return lines
 }
@@ -20,11 +21,11 @@ export function removedLinesArray(lines) {
 export function removedLinesByCardIdArray(lines, cards, cardId) {
     for (let i = 0; i < cards.length; i++) {
         for (let j = 0; j < cards[i].ops.length; j++) {
-            if (cards[i].id == cardId) {
+            if (cards[i].id === cardId) {
                 lines = removedGivenLineByIdArray(lines, cards[i].ops[j].id)
             }
 
-            if (cards[i].ops[j].next == cardId) {
+            if (cards[i].ops[j].next === cardId) {
                 lines = removedGivenLineByIdArray(lines, cards[i].ops[j].id)
             }
         }
@@ -48,11 +49,11 @@ export function updatePosition(lines, id) {
 export function updatePositions(lines, cards, cardId) {
     for (let i = 0; i < cards.length; i++) {
         for (let j = 0; j < cards[i].ops.length; j++) {
-            if (cards[i].id == cardId) {
+            if (cards[i].id === cardId) {
                 lines = updatePosition(lines, cards[i].ops[j].id);
             }
 
-            if (cards[i].ops[j].next == cardId) {
+            if (cards[i].ops[j].next === cardId) {
                 lines = updatePosition(lines, cards[i].ops[j].id);
             }
         }

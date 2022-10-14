@@ -1,14 +1,12 @@
 import '../index.css'
-import ozan from '../images/ozan.gif'
 import logo from '../images/logo512.png'
 import wireframe from '../images/wireframe.png'
 import bp from '../images/bp.jpg'
 import orteke from '../images/orteke.jpg'
 import * as loreUtils from '../utils/lore.js'
 import React from 'react'
-import { useNavigate } from "react-router-dom";
 import {
-  Grid, Image, Segment, Header, Icon, Button, Divider, Search, Container, Rail, Modal, List, Popup, Label, Sticky
+  Grid, Image, Segment, Header, Icon, Button, Divider, Container, Modal, List, Popup, Label, Sticky
 } from 'semantic-ui-react'
 
 export default class Board extends React.Component {
@@ -106,7 +104,7 @@ export default class Board extends React.Component {
                 <Modal.Content image>
                   <Modal.Description>
                     <Header>History</Header>
-                    {this.state.lores.length == 0 ?
+                    {this.state.lores.length === 0 ?
                       (<p>Not found</p>) :
                       (<List>
                         {Object.keys(this.state.lores).map((charName, i) =>
@@ -195,9 +193,9 @@ export default class Board extends React.Component {
                     Dialog boardunda bulunan UE datatable export seçeneği ile dialog'u export edebilirsiniz.
                     Ardından aşağıda linkleri bulunan unreal engine ile uyumlu data table dosyalarını kullanarak
                     oyun projenize ekleyebilirsiniz. Oyun içinde nasıl kullanacağınıza kendiniz karar vermelisiniz.<br /> <br />
-                    <a href='' className='teal'>- Example BP </a><br />
-                    <a href='' className='teal'>- Card Data Table </a><br />
-                    <a href='' className='teal'>- Option Data Table</a> <br />
+                    <a href='#0' className='teal'>- Example BP </a><br />
+                    <a href='#0' className='teal'>- Card Data Table </a><br />
+                    <a href='#0' className='teal'>- Option Data Table</a> <br />
                   </p>
                   <Header as='h2' className='white-text'>How it works?</Header>
                   <p>

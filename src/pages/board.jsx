@@ -44,6 +44,8 @@ export default class Board extends React.Component {
             cards[cardUtils.cardIndexFromId(data.id)].ops[optionUtils.optionIndexFromId(data.id)].text = data.text;
 
             break
+          default:
+            break
         }
 
         break
@@ -67,6 +69,8 @@ export default class Board extends React.Component {
             cards[cardUtils.cardIndexFromId(data.id)].ops[optionUtils.optionIndexFromId(data.id)].next = data.next;
 
             break
+          default:
+            break
         }
 
         break
@@ -83,13 +87,15 @@ export default class Board extends React.Component {
               cards[cardUtils.cardIndexFromId(data.id)].ops, data.id);
 
             break
+          default:
+            break
         }
 
         break
       case 'select':
         switch (data.type) {
           case 'card':
-            if (this.state.selected != '') {
+            if (this.state.selected !== '') {
               lines = lineUtils.removedGivenLineByIdArray(lines, selected);
 
               let cardId = cardUtils.cardIndexFromId(selected);
@@ -105,6 +111,8 @@ export default class Board extends React.Component {
             selected = data.id;
 
             break
+          default:
+            break
         }
 
         break
@@ -117,6 +125,8 @@ export default class Board extends React.Component {
         cards[cardUtils.cardIndexFromId(data.id)].ops[optionUtils.optionIndexFromId(data.id)].token = nanoid();
         lines = lineUtils.removedGivenLineByIdArray(lines, data.id);
 
+        break
+      default:
         break
     }
 
@@ -164,7 +174,7 @@ export default class Board extends React.Component {
                 addLine={this.addLine.bind(this)}
                 removeLine={this.removeLine.bind(this)}
                 position={card.position}
-                isConnectable={this.state.selected != ''}
+                isConnectable={this.state.selected !== ''}
               />
             )}
           </Grid.Column>

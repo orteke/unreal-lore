@@ -105,7 +105,7 @@ export default class DialogCard extends React.Component {
 
 
             {this.props.isConnectable ?
-              <a onClick={this.handleSelect} className='chain'><Label circular className='card-number-right teal' >
+              <a href='#0' onClick={this.handleSelect} className='chain'><Label circular className='card-number-right teal' >
                 <Icon name='chain' />
               </Label></a> : false}
 
