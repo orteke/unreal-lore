@@ -91,7 +91,7 @@ code {
 }
 
 .hidden-scroll::-webkit-scrollbar {
-  display: none;
+  display: block;
 }
 
 .hidden-scroll {
