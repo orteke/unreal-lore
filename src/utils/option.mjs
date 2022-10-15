@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import * as cardUtils from '../utils/card.js'
+import * as cardUtils from '../utils/card.mjs'
 
 export function optionIndexFromId(id) {
     return parseInt(id.split('o')[1]) - 1

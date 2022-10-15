@@ -4,7 +4,7 @@ import wireframe from '../images/wireframe.png'
 import orteke from '../images/orteke.jpg'
 import sop from '../images/sop.png'
 import sdialog from '../images/sdialog.png'
-import * as loreUtils from '../utils/lore.js'
+import * as loreUtils from '../utils/lore.mjs'
 import React from 'react'
 import {
   Grid, Image, Segment, Header, Icon, Button, Divider, Container, Modal, List, Popup, Label, Sticky

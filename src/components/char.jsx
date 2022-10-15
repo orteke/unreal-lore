@@ -4,7 +4,7 @@ import React from 'react'
 import {
   Image, Card, Button, Icon, Sticky, Input, Popup
 } from 'semantic-ui-react'
-import * as loreUtils from '../utils/lore.js'
+import * as loreUtils from '../utils/lore.mjs'
 
 export default class Char extends React.Component {
   constructor(props) {
