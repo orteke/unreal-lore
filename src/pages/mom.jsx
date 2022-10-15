@@ -1,8 +1,9 @@
 import '../index.css'
 import logo from '../images/logo512.png'
 import wireframe from '../images/wireframe.png'
-import bp from '../images/bp.jpg'
 import orteke from '../images/orteke.jpg'
+import sop from '../images/sop.png'
+import sdialog from '../images/sdialog.png'
 import * as loreUtils from '../utils/lore.js'
 import React from 'react'
 import {
@@ -178,44 +179,45 @@ export default class Board extends React.Component {
                     <Image src='https://res.cloudinary.com/dukp6c7f7/image/upload/f_auto,fl_lossy,q_auto/s3-ghost//2019/02/Settings-Sync.gif' size='massive' />
                     <br />
 
-                    UL özellikle rpg oyunları gibi uzun ve alternatif seçenekli diyalogları yazmak için geliştirilmiştir.<br /><br />
-                    - Oyun senaryosunu yazarken diyalogların nasıl ilerleyeceğini görsel olarak görebilirsiniz. <br />
-                    - Aşırı kısa veya aşırı uzun diyalog akışlarını tespit edebilirsiniz.<br />
-                    - Her bir karakter için ayrı bir diyalog boardu oluşturursunuz ve kolayca aklınızda olan
-                    hikayeyi yazmaya başlarsınız.<br />
+                    UL developing specifically for writing long, optional and non-deterministic dialogues in game projects such as rpg games.<br /><br />
+                    - While writing the game scenario, you can visually see how the dialogues will progress. <br />
+                    - You can detect excessively short or excessively long dialogue streams.<br />
+                    - You create a separate dialogue board for each character and you can easily start to write the story.<br />
                   </p>
                 </div><br />
 
                 <div>
-                  <Header as='h2' className='white-text'>Unreal Engine ile Kullanım</Header><br />
-                  <Image src={bp} size='massive' /><br />
+                  <Header as='h2' className='white-text'>Use with Unreal Engine</Header><br />
+                  <Image src={sop} size='massive' /><br />
+                  <Image src={sdialog} size='massive' /><br />
                   <p>
-                    Dialog boardunda bulunan UE datatable export seçeneği ile dialog'u export edebilirsiniz.
-                    Ardından aşağıda linkleri bulunan unreal engine ile uyumlu data table dosyalarını kullanarak
-                    oyun projenize ekleyebilirsiniz. Oyun içinde nasıl kullanacağınıza kendiniz karar vermelisiniz.<br /> <br />
-                    <a href='#0' className='teal'>- Example BP </a><br />
-                    <a href='#0' className='teal'>- Card Data Table </a><br />
-                    <a href='#0' className='teal'>- Option Data Table</a> <br />
+                    Unreal Engine plugin status is active development. We will set production soon as possible.<br />
+                    You can export the dialog with the UE datatable export option on the dialog board.
+                    You could create 'ue structure' and bind exported file.
+                    You have to decide for yourself how you will use it in the game.<br /> <br />
+
                   </p>
-                  <Header as='h2' className='white-text'>How it works?</Header>
+                  <Header as='h2' className='white-text'>How It Works?</Header>
                   <p>
-                    Oyuncunun konuşabilieceği her karakter için bir karakter boardu oluşturulur.
-                    Daha sonra bu fiyalog dosyasını export ederek istediğiniz gibi kullanabilirsiniz.
-                    Olluşturduğunuz tüm boardlar browserda saklanır. Doğal olarak bu board bilgilerini kaybedebilirsiniz.
-                    Endişelenmeyin, export ettiğiniz dosyaları saklayarak ihtiyaç duyduğunuzda geri yükleyip board için kaldığınız yerden devam edebilirsiniz.
+                    A character board is created for each character the player can talk to.
+                    Then you can export this dialog file and use it as you wish.
+                    All the boards you create are stored in the browser. Naturally, you may lose this board information.
+                    Don't worry, you can save the files you exported, restore them whenever you need, and continue where you left off for the board.
                   </p>
                   <Header as='h4' className='white-text'>Cards</Header>
-                  <p>Cardların hint denilen bölümü karakterin oyuncuya söyleyeceği sözü yada soruyu içerir.
-                    Kartlar sıralıdır ve her bir kart silindiğinde sıra güncellenir.</p>
+                  <p>The part of the cards called hint contains the word or question that the character will say to the player.
+                    The cards are in order, and the order is updated each time a card is deleted.</p>
                   <Header as='h4' className='white-text'>Options</Header>
-                  <p>Optionlar oyuncunun karaktere vereceği cevabı içerir. Her kart içerisinde istediğiniz sayıda oluşturabilirsiniz.
-                    Her option bir karta bağlanır ve bu sayede diyalog akışı sağlanır. Her optionın bir karta bağlanması zorunlu değildir.
-                    Bu durumda diyalog bitti demektir. Bu özellikle bir board içerisinde birden fazla diyalog akışı oluşturabilirsiniz.
-                    Bir karta bağlanmayan option'ın next değeri '0' olur.</p>
+                  <p>Options contain the player's response to the character. You can create any number of cards in each card.
+                    Each option is connected to a card, thus providing a flow of dialogue. Not every option has to be tied to a card.
+                    In this case, the dialog is over. With this feature, you can create multiple dialog flows within a board.
+                    The next value of the option that is not connected to a card will be '0'.</p>
                   <Header as='h4' className='white-text'>Lines</Header>
-                  <p>Linelar bir optionı bir karta bağlar. kesilebilir ve tekrar başka kartlara bağlanabilirler.</p>
+                  <p>Lines connect an option to a board. they can be disconnected and reconnected to other cards.</p>
                   <Header as='h2' className='white-text'>Upcoming Features</Header>
-                  <p>Unutma, her zaman ücretsiz sürümümüz olacaktır. Bu sayede gönül rahatlığıyla bu projeyi kullanabilirsin.<br /><br />
+                  <p>Remember, we will always have the free version. We are game developers and we want help other game developers.
+                    In this way, you can use this project with peace of mind.<br /><br />
+                    - Unreal Engine Plugin and useful funcs<br />
                     - Cloud Store<br />
                     - Google Drive Store<br />
                     - UI/UX Improvements<br />
