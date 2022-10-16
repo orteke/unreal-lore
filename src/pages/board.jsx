@@ -131,7 +131,7 @@ export default class Board extends React.Component {
     }
 
     loreUtils.updateLore(cards, character);
-    this.setState({ ...this.state, lines: lines, cards: cards, selected: selected });
+    this.setState({ ...this.state, character: character, lines: lines, cards: cards, selected: selected });
   }
 
   handleExportJSON() {

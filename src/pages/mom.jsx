@@ -176,7 +176,7 @@ export default class Board extends React.Component {
               <div className='hidden-scroll'>
                 <div>
                   <p className='description'>
-                    <Image src='https://res.cloudinary.com/dukp6c7f7/image/upload/f_auto,fl_lossy,q_auto/s3-ghost//2019/02/Settings-Sync.gif' size='massive' />
+                    <Image src='https://iili.io/tKaTEN.gif' size='massive' />
                     <br />
 
                     UL developing specifically for writing long, optional and non-deterministic dialogues in game projects such as rpg games.<br /><br />

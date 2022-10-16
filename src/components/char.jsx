@@ -56,6 +56,8 @@ export default class Char extends React.Component {
     this.setState({ ...this.state, name: event.target.value })
     this.props.onChange('input', {
       type: 'character',
+      field: 'name',
+      before: this.state.name,
       character: {
         name: event.target.value,
         role: this.state.role,
@@ -69,6 +71,7 @@ export default class Char extends React.Component {
     this.setState({ ...this.state, role: event.target.value })
     this.props.onChange('input', {
       type: 'character',
+      field: 'role',
       character: {
         name: this.state.name,
         role: event.target.value,
@@ -82,6 +85,7 @@ export default class Char extends React.Component {
     this.setState({ ...this.state, imageUrl: base64Text })
     this.props.onChange('input', {
       type: 'character',
+      field: 'image',
       character: {
         name: this.state.name,
         role: this.state.role,
@@ -95,6 +99,7 @@ export default class Char extends React.Component {
     this.setState({ ...this.state, description: event.target.value })
     this.props.onChange('input', {
       type: 'character',
+      field: 'description',
       character: {
         name: this.state.name,
         role: this.state.role,
