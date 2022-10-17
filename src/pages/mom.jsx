@@ -45,7 +45,7 @@ export default class Board extends React.Component {
     read.readAsText(file);
     read.onloadend = function () {
       let lore = JSON.parse(read.result);
-      if (lore.hasOwnProperty("character") && lore.hasOwnProperty("cards")) {
+      if (!lore.hasOwnProperty("character") || !lore.hasOwnProperty("cards")) {
         alert('file is not a fit lore schema!');
       }
 
